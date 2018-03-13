@@ -1,0 +1,63 @@
+{
+  "name": "jest-screenshot",
+  "version": "0.0.0",
+  "description": "A jest extension to deal with screenshots and all sorts of images.",
+  "main": "dist/index.js",
+  "author": "Frederick Gnodtke",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig-production.json --sourceMap",
+    "test": "jest",
+    "lint": "tslint --format stylish --type-check --project tsconfig.json",
+    "clean": "rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Prior99/jest-screenshot"
+  },
+  "files": [
+    "dist",
+    "index.d.ts",
+    "src",
+    "LICENSE",
+    "README.md",
+    "example"
+  ],
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "statements": 100,
+        "lines": 100,
+        "functions": 100,
+        "branches": 100
+      }
+    },
+    "collectCoverage": true,
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts)$": "ts-jest"
+    },
+    "testMatch": [
+      "**/__tests__/*.(ts|js)"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "mapCoverage": true
+  },
+  "devDependencies": {
+    "@types/jest": "^21.1.7",
+    "bind-decorator": "^1.0.11",
+    "coveralls": "^3.0.0",
+    "jest": "^21.2.1",
+    "ts-jest": "^21.2.3",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.1"
+  },
+  "dependencies": {
+  }
+}

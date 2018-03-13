@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "declaration": true,
+        "noImplicitAny": true,
+        "removeComments": false,
+        "experimentalDecorators": true,
+        "jsx": "react",
+        "outDir": "dist",
+        "lib": ["es2016", "dom"],
+        "baseUrl": "./src",
+        "emitDecoratorMetadata": true
+    },
+    "exclude": [
+        "**/__tests__/*",
+        "node_modules.",
+        "dist/",
+        "example/",
+        "index.d.ts",
+        "middleware.d.ts"
+    ]
+}

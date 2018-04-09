@@ -45,12 +45,12 @@ function getSnapshotPath(
 }
 
 export function toMatchImageSnapshot(received: Buffer, configuration: ToMatchImageSnapshotConfiguration): MatcherResult {
+    console.log(this)
     if (!isJestTestConfiguration(this)) {
         throw new Error("Jest: Attempted to call toMatchImageSnapshot outside of Jest context.");
     }
     const { testPath, currentTestName, isNot } = this;
     let { snapshotState } = this;
-    console.log(snapshotState, this)
     if (isNot) {
         throw new Error("Jest: `.not` cannot be used with `.toMatchImageSnapshot()`.");
     }
@@ -65,6 +65,6 @@ export function toMatchImageSnapshot(received: Buffer, configuration: ToMatchIma
 
 export function configureToMatchImageSnapshot(configuration: ToMatchImageSnapshotConfiguration = {}) {
     return function (received: Buffer) {
-        return toMatchImageSnapshot(received, configuration);
+        return toMatchImageSnapshot.apply(this, received, configuration);
     };
 }

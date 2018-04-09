@@ -19,3 +19,11 @@ lint: node_modules
 .PHONY: clean
 clean:
 	rm -rf dist
+
+.PHONY: release
+release: clean test lint build
+	test `cat package.json | jq ".version"` = '"${VERSION}"'
+	git tag ${VERSION}
+	git push
+	git push --tags
+	yarn publish

@@ -1,10 +1,9 @@
 import { decode, readPngFileSync, writePngFileSync, PngImage } from "node-libpng";
 import { diffImages } from "native-image-diff";
-import { SnapshotState, isJestTestConfiguration, MatcherResult } from "./jest";
-import * as path from "path";
-import kebabCase from "lodash.kebabcase";
 import chalk from "chalk";
 import { existsSync, writeFileSync } from "fs";
+import { getSnapshotPath } from "./filenames";
+import { SnapshotState, isJestTestConfiguration, MatcherResult } from "./jest";
 
 export interface ToMatchImageSnapshotConfiguration {
     detectAntialiasing?: boolean;
@@ -13,37 +12,6 @@ export interface ToMatchImageSnapshotConfiguration {
     pixelThresholdRelative?: number;
     identifier?: ((testPath: string, currentTestName: string, counter: number) => string);
     snapshotsDir?: string;
-}
-
-function getSnapshotFileName(
-    testPath: string,
-    currentTestName: string,
-    snapshotState: SnapshotState,
-    { identifier }: ToMatchImageSnapshotConfiguration,
-) {
-    const counter = (snapshotState._counters.get(currentTestName) || 0) + 1;
-    if (typeof identifier === "function") {
-        const fileName = identifier(testPath, currentTestName, counter);
-        if (fileName.toLowerCase().endsWith(".snap.png")) {
-            return fileName;
-        }
-        return `${fileName}.snap.png`;
-    }
-    if (typeof identifier !== "undefined") {
-        throw new Error("Jest: Invalid configuration for `.toMatchImageSnapshot`: `identifier` must be a function.");
-    }
-    return `${kebabCase(path.basename(testPath))}-${kebabCase(currentTestName)}-${counter}.snap.png`;
-}
-
-function getSnapshotPath(
-    testPath: string,
-    currentTestName: string,
-    snapshotState: SnapshotState,
-    configuration: ToMatchImageSnapshotConfiguration,
-) {
-    const { snapshotsDir } = configuration;
-    const fileName = getSnapshotFileName(testPath, currentTestName, snapshotState, configuration);
-    return path.join(path.dirname(testPath), snapshotsDir || "__snapshots__", fileName);
 }
 
 function checkImages(

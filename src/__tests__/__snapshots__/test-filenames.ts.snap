@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getSnapshotFileName with a custom identifier generator throws an error if the generator wasn't a function but also not \`undefined\` 1`] = `"Jest: Invalid configuration for \`.toMatchImageSnapshot\`: \`identifier\` must be a function."`;

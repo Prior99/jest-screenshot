@@ -1,7 +1,7 @@
 import { jestScreenshot } from "..";
 import { toMatchImageSnapshot } from "../to-match-image-snapshot";
 import { SnapshotState, JestTestConfiguration } from "../jest";
-import { readFileSync, unlinkSync, existsSync } from "fs";
+import { readFileSync, unlinkSync, existsSync, writeFileSync } from "fs";
 
 function getJestTestConfiguration(): JestTestConfiguration {
     let testConfiguration: JestTestConfiguration;
@@ -19,8 +19,20 @@ function getJestTestConfiguration(): JestTestConfiguration {
 }
 
 describe("toMatchImageSnapshot", () => {
-    beforeAll(() => {
+    let testConfig: JestTestConfiguration;
+    let originalUpdateSnapshot: "new" | "all" | "none";
+
+    beforeEach(() => {
         expect.extend(jestScreenshot());
+    });
+
+    beforeEach(() => {
+        testConfig = getJestTestConfiguration();
+        originalUpdateSnapshot = testConfig.snapshotState._updateSnapshot;
+    });
+
+    afterEach(() => {
+        testConfig.snapshotState._updateSnapshot = originalUpdateSnapshot;
     });
 
     describe("with no threshold provided", () => {
@@ -93,9 +105,37 @@ describe("toMatchImageSnapshot", () => {
         });
     });
 
+    describe("with the snapshot not matching", () => {
+        const snapshotToUpdatePath = `${__dirname}/__snapshots__/test-to-match-image-snapshot-ts-to-match-image-snapshot-with-the-snapshot-not-matching-updates-the-snapshot-when-updating-is-enabled-1.snap.png`; // tslint:disable-line
+        const originalContent = readFileSync(snapshotToUpdatePath);
+
+        afterEach(() => {
+            try {
+                writeFileSync(snapshotToUpdatePath, originalContent);
+            } catch (err) {
+                return;
+            }
+        });
+
+        it("updates the snapshot when updating is enabled", () => {
+            const expectedContent = readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`);
+            expect(() => {
+                testConfig.snapshotState._updateSnapshot = "all";
+                expect(expectedContent).toMatchImageSnapshot();
+            }).not.toThrowError();
+            expect(readFileSync(snapshotToUpdatePath)).toEqual(expectedContent);
+        });
+
+        it("fails when updating is disabled", () => {
+            expect(() => {
+                testConfig.snapshotState._updateSnapshot = "none";
+                expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
+            }).toThrowErrorMatchingSnapshot();
+            expect(readFileSync(snapshotToUpdatePath)).toEqual(originalContent);
+        });
+    });
+
     describe("with the snapshot not existing", () => {
-        let testConfig: JestTestConfiguration;
-        let originalUpdateSnapshot: "new" | "all" | "none";
         const snapshotToCreatePath = `${__dirname}/__snapshots__/test-to-match-image-snapshot-ts-to-match-image-snapshot-with-the-snapshot-not-existing-creates-the-snapshot-when-updating-is-enabled-1.snap.png`; // tslint:disable-line
 
         afterEach(() => {
@@ -106,16 +146,7 @@ describe("toMatchImageSnapshot", () => {
             }
         });
 
-        beforeEach(() => {
-            testConfig = getJestTestConfiguration();
-            originalUpdateSnapshot = testConfig.snapshotState._updateSnapshot;
-        });
-
-        afterEach(() => {
-            testConfig.snapshotState._updateSnapshot = originalUpdateSnapshot;
-        });
-
-        const test = it("fails when updating is disabled", () => {
+        it("fails when updating is disabled", () => {
             expect(() => {
                 testConfig.snapshotState._updateSnapshot = "none";
                 expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();

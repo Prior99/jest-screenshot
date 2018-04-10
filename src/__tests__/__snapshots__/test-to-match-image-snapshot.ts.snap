@@ -39,3 +39,9 @@ exports[`toMatchImageSnapshot with the snapshot not existing fails when updating
 
 This is likely because this test is run in a continuous integration (CI) environment in which snapshots are not written by default."
 `;
+
+exports[`toMatchImageSnapshot with the snapshot not matching fails when updating is disabled 1`] = `
+"[31mReceived value[39m does not match [32mstored snapshot 1[39m.
+
+Expected less than [32m0.00%[39m of the pixels to have changed, but [31m45.44%[39m of the pixels changed."
+`;

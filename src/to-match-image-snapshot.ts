@@ -49,6 +49,7 @@ function getSnapshotPath(
 function checkImages(
     snapshotImage: PngImage,
     receivedImage: PngImage,
+    snapshotNumber: number,
     configuration: ToMatchImageSnapshotConfiguration,
 ): MatcherResult {
     const {
@@ -64,12 +65,15 @@ function checkImages(
         colorThreshold,
         detectAntialiasing,
     });
+    const expected = `stored snapshot ${snapshotNumber}`;
+    const preamble = `${chalk.red("Received value")} does not match ${chalk.green(expected)}.`;
     if (typeof pixelThresholdAbsolute === "number" && changedPixels > pixelThresholdAbsolute) {
         return {
             pass: false,
             message: () =>
-                `Expected image to have less than ${chalk.green(String(pixelThresholdAbsolute))} pixels changed, ` +
-                `but ${chalk.red(String(changedPixels))} pixels changed.`,
+                `${preamble}\n\n` +
+                `Expected less than ${chalk.green(`${pixelThresholdAbsolute} pixels`)} to have changed, ` +
+                `but ${chalk.red(`${changedPixels} pixels`)} changed.`,
         };
     }
     const snapshotImagePixels = snapshotImage.width * snapshotImage.height;
@@ -82,8 +86,9 @@ function checkImages(
         return {
             pass: false,
             message: () =>
-                `Expected image to have less than ${chalk.green(percentThreshold)}% changed, ` +
-                `but ${chalk.red(percentChanged)}% changed.`,
+                `${preamble}\n\n` +
+                `Expected less than ${chalk.green(`${percentThreshold}%`)} of the pixels to have changed, ` +
+                `but ${chalk.red(`${percentChanged}%`)} of the pixels changed.`,
         };
     }
     return { pass: true };
@@ -116,14 +121,18 @@ export function toMatchImageSnapshot(
         // Otherwise fail due to missing snapshot.
         return {
             pass: false,
-            message: () => `Snapshot missing.`,
+            message: () => `New snapshot was ${chalk.red("not written")}. ` +
+                `The update flag must be explicitly passed to write a new snapshot.\n\n` +
+                `This is likely because this test is run in a continuous integration (CI) environment ` +
+                `in which snapshots are not written by default.`,
         };
     }
     // Decode the new image and read the snapshot.
     const snapshotImage = readPngFileSync(snapshotPath);
     const receivedImage = decode(received);
     // Perform the actual diff of the images.
-    const { pass, message } = checkImages(snapshotImage, receivedImage, configuration);
+    const snapshotNumber = snapshotState._counters.get(currentTestName) || 1;
+    const { pass, message } = checkImages(snapshotImage, receivedImage, snapshotNumber, configuration);
     // If the user specified `-u` and the snapshot changed, update the stored snapshot.
     if (!pass && _updateSnapshot === "all") {
         snapshotState.updated++;

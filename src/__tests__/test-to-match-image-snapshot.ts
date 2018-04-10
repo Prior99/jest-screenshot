@@ -1,6 +1,22 @@
 import { jestScreenshot } from "..";
 import { toMatchImageSnapshot } from "../to-match-image-snapshot";
-import { readFileSync } from "fs";
+import { SnapshotState, JestTestConfiguration } from "../jest";
+import { readFileSync, unlinkSync, existsSync } from "fs";
+
+function getJestTestConfiguration(): JestTestConfiguration {
+    let testConfiguration: JestTestConfiguration;
+    expect.extend({
+        storeSnapshotState() {
+            testConfiguration = this as any;
+            return {
+                pass: true,
+                message() { return ""; },
+            };
+        },
+    });
+    (expect as any)().storeSnapshotState();
+    return testConfiguration;
+}
 
 describe("toMatchImageSnapshot", () => {
     beforeAll(() => {
@@ -74,6 +90,45 @@ describe("toMatchImageSnapshot", () => {
             expect(function() {
                 toMatchImageSnapshot(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`), {});
             }.bind({})).toThrowErrorMatchingSnapshot();
+        });
+    });
+
+    describe("with the snapshot not existing", () => {
+        let testConfig: JestTestConfiguration;
+        let originalUpdateSnapshot: "new" | "all" | "none";
+        const snapshotToCreatePath = `${__dirname}/__snapshots__/test-to-match-image-snapshot-ts-to-match-image-snapshot-with-the-snapshot-not-existing-creates-the-snapshot-when-updating-is-enabled-1.snap.png`; // tslint:disable-line
+
+        afterEach(() => {
+            try {
+                unlinkSync(snapshotToCreatePath);
+            } catch (err) {
+                return;
+            }
+        });
+
+        beforeEach(() => {
+            testConfig = getJestTestConfiguration();
+            originalUpdateSnapshot = testConfig.snapshotState._updateSnapshot;
+        });
+
+        afterEach(() => {
+            testConfig.snapshotState._updateSnapshot = originalUpdateSnapshot;
+        });
+
+        const test = it("fails when updating is disabled", () => {
+            expect(() => {
+                testConfig.snapshotState._updateSnapshot = "none";
+                expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
+            }).toThrowErrorMatchingSnapshot();
+        });
+
+        it("creates the snapshot when updating is enabled", () => {
+            expect(existsSync(snapshotToCreatePath)).toBe(false);
+            expect(() => {
+                testConfig.snapshotState._updateSnapshot = "all";
+                expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
+            }).not.toThrowError();
+            expect(existsSync(snapshotToCreatePath)).toBe(true);
         });
     });
 });

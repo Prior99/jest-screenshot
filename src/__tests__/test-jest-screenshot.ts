@@ -30,6 +30,5 @@ describe("jestScreenshot", () => {
                 pixelThresholdAbsolute: 100,
             },
         );
-
     });
 });

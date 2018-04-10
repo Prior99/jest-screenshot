@@ -17,6 +17,9 @@ export interface MatcherResult {
     pass: boolean;
 }
 
+/**
+ * Checks whether the given input is a `SnapshotState` provided by jest.
+ */
 export function isSnapshotState(obj: any): obj is SnapshotState {
     if (typeof obj !== "object") { return false; }
     if (obj === null) { return false; }
@@ -29,6 +32,9 @@ export function isSnapshotState(obj: any): obj is SnapshotState {
     return true;
 }
 
+/**
+ * Checks whether the given input is a `JestTestConfiguration` provided by jest.
+ */
 export function isJestTestConfiguration(obj: any): obj is JestTestConfiguration {
     if (typeof obj !== "object") { return false; }
     if (obj === null) { return false; }

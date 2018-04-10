@@ -5,15 +5,55 @@ import { existsSync, writeFileSync } from "fs";
 import { getSnapshotPath } from "./filenames";
 import { SnapshotState, isJestTestConfiguration, MatcherResult } from "./jest";
 
+/**
+ * Used as configuration for `toMatchImageSnapshot`.
+ */
 export interface ToMatchImageSnapshotConfiguration {
+    /**
+     * Passed to **native-image-diff**. Will disable or enable antialiasing detection.
+     * Defaults to `true`.
+     */
     detectAntialiasing?: boolean;
+    /**
+     * Passed to **native-image-diff**. Specifies the threshold on a scale from `0` to `1`
+     * for when a pixel counts as changed. `0` allows no difference between two pixels and
+     * `1` detects no difference between a white and a black pixel.
+     */
     colorThreshold?: number;
+    /**
+     * If specified, makes the test check for the absolute number of pixels changed. When for example
+     * set to `100`, An image which differs from it's snapshot by `101` pixels would fail.
+     *
+     * Is set to `undefined` by default and hence the check is disabled.
+     */
     pixelThresholdAbsolute?: number;
+    /**
+     * If specified, makes the test check for the relative number of pixels changed. When for example
+     * set to `0.5`, An image which differs from it's snapshot by 50.0001% of the pixels would fail.
+     *
+     * Is set to `0` if neither `pixelThresholdAbsolute` nor `pixelThresholdRelative` are confiured.
+     */
     pixelThresholdRelative?: number;
+    /**
+     * An optional generator function for generating the names for the image snapshot files.
+     */
     identifier?: ((testPath: string, currentTestName: string, counter: number) => string);
+    /**
+     * An optional directory name to store the snapshots in. Defaults to `__snapshots__`.
+     */
     snapshotsDir?: string;
 }
 
+/**
+ * Performs the actual check for equality of two images.
+ *
+ * @param snapshotImage The image from the snapshot.
+ * @param receivedImage The image received from the `expect(...)` call.
+ * @param snapshotNumber The number of the snapshot in this test.
+ * @param configuration The configuration of the call to `toMatchImageSnapshot`.
+ *
+ * @return A `MatcherResult` with `pass` and a message which can be handed to jest.
+ */
 function checkImages(
     snapshotImage: PngImage,
     receivedImage: PngImage,
@@ -62,6 +102,15 @@ function checkImages(
     return { pass: true };
 }
 
+/**
+ * A matcher for jest with compares a PNG image to a stored snapshot. Behaves similar to `.toMatchSnapshot()`.
+ *
+ * @param received The buffer from the call to `expect(...)`.
+ * @param configuration The configuration object provided when initializing this library
+ *     with a call to `jestScreenshot`.
+ *
+ * @return A `MatcherResult` usable by jest.
+ */
 export function toMatchImageSnapshot(
     received: Buffer,
     configuration: ToMatchImageSnapshotConfiguration,

@@ -3,6 +3,18 @@ import { ToMatchImageSnapshotConfiguration } from "./to-match-image-snapshot";
 import * as path from "path";
 import kebabCase from "lodash.kebabcase";
 
+/**
+ * Calculates the filename for an individual image snapshot file.
+ * Depending on the configuration the provided `identifier` generator will be used
+ * or a default identifier will be generated.
+ *
+ * @param testPath The `testPath` from the jest test configuration, leading to the test file.
+ * @param currentTestName The `currentTestName` from the jest test configuration,
+ *     the name of the current `it`/`describe` test.
+ * @param snapshotState The `snapshotState` from the jest test configuration.
+ *
+ * @return A string used as a filename for the current snapshot.
+ */
 export function getSnapshotFileName(
     testPath: string,
     currentTestName: string,
@@ -23,6 +35,16 @@ export function getSnapshotFileName(
     return `${kebabCase(path.basename(testPath))}-${kebabCase(currentTestName)}-${counter}.snap.png`;
 }
 
+/**
+ * Calculates the absolute path to an individual image snapshot file.
+ *
+ * @param testPath The `testPath` from the jest test configuration, leading to the test file.
+ * @param currentTestName The `currentTestName` from the jest test configuration,
+ *     the name of the current `it`/`describe` test.
+ * @param snapshotState The `snapshotState` from the jest test configuration.
+ *
+ * @return A string with the absolute path to the current snapshot.
+ */
 export function getSnapshotPath(
     testPath: string,
     currentTestName: string,

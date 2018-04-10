@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`toMatchImageSnapshot when called outside of a jest unit test context fails 1`] = `"Jest: Attempted to call \`.toMatchImageSnapshot()\` outside of Jest context."`;
+
 exports[`toMatchImageSnapshot with \`.not\` specified fails always 1`] = `"Jest: \`.not\` cannot be used with \`.toMatchImageSnapshot()\`."`;
 
 exports[`toMatchImageSnapshot with an absolute threshold provided fails with an absolute threshold of 204 1`] = `"Expected image to have less than [32m204[39m pixels changed, but [31m205[39m pixels changed."`;

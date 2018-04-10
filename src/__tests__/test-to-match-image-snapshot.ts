@@ -1,4 +1,5 @@
 import { jestScreenshot } from "..";
+import { toMatchImageSnapshot } from "../to-match-image-snapshot";
 import { readFileSync } from "fs";
 
 describe("toMatchImageSnapshot", () => {
@@ -65,6 +66,14 @@ describe("toMatchImageSnapshot", () => {
             expect(() => {
                 expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).not.toMatchImageSnapshot();
             }).toThrowErrorMatchingSnapshot();
+        });
+    });
+
+    describe("when called outside of a jest unit test context", () => {
+        it("fails", () => {
+            expect(function() {
+                toMatchImageSnapshot(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`), {});
+            }.bind({})).toThrowErrorMatchingSnapshot();
         });
     });
 });

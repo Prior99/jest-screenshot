@@ -95,7 +95,7 @@ export function toMatchImageSnapshot(
 ): MatcherResult {
     // Check whether `this` is really the expected Jest configuration.
     if (!isJestTestConfiguration(this)) {
-        throw new Error("Jest: Attempted to call toMatchImageSnapshot outside of Jest context.");
+        throw new Error("Jest: Attempted to call `.toMatchImageSnapshot()` outside of Jest context.");
     }
     const { testPath, currentTestName, isNot } = this;
     if (isNot) {

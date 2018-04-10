@@ -1,7 +1,6 @@
 export interface SnapshotState {
-    _counters: {
-        get(name: string): number;
-    };
+    _counters: Map<string, number>;
+    _updateSnapshot: "new" | "all" | "none";
 }
 
 export interface JestTestConfiguration {
@@ -12,7 +11,7 @@ export interface JestTestConfiguration {
 }
 
 export interface MatcherResult {
-    message(): string;
+    message?(): string;
     pass: boolean;
 }
 

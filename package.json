@@ -61,6 +61,7 @@
     "typescript": "^2.6.1"
   },
   "dependencies": {
+    "chalk": "^2.3.2",
     "lodash.kebabcase": "^4.1.1",
     "native-image-diff": "^0.1.0",
     "node-libpng": "^0.2.0"

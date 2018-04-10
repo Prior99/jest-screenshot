@@ -59,4 +59,12 @@ describe("toMatchImageSnapshot", () => {
             }).not.toThrowError();
         });
     });
+
+    describe("with `.not` specified", () => {
+        it("fails always", () => {
+            expect(() => {
+                expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).not.toMatchImageSnapshot();
+            }).toThrowErrorMatchingSnapshot();
+        });
+    });
 });

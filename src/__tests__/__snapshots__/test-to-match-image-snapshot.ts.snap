@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`toMatchImageSnapshot with \`.not\` specified fails always 1`] = `"Jest: \`.not\` cannot be used with \`.toMatchImageSnapshot()\`."`;
+
 exports[`toMatchImageSnapshot with an absolute threshold provided fails with an absolute threshold of 204 1`] = `"Expected image to have less than [32m204[39m pixels changed, but [31m205[39m pixels changed."`;
 
 exports[`toMatchImageSnapshot with no threshold provided with a color threshold of 0 detects the snapshot as not matching 1`] = `"Expected image to have less than [32m0.00[39m% changed, but [31m53.24[39m% changed."`;

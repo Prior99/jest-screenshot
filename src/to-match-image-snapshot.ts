@@ -99,7 +99,7 @@ export function toMatchImageSnapshot(
     }
     const { testPath, currentTestName, isNot } = this;
     if (isNot) {
-        throw new Error("Jest: `.not` cannot be used with `.toThrowErrorMatchingSnapshot()`.");
+        throw new Error("Jest: `.not` cannot be used with `.toMatchImageSnapshot()`.");
     }
     let { snapshotState } = this;
     const { _updateSnapshot } = snapshotState;

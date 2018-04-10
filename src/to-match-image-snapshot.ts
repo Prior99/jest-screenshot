@@ -59,8 +59,8 @@ function checkImages(
     } = configuration;
     // Perform the actual image diff.
     const { pixels: changedPixels, image } = diffImages({
-        image1: snapshotImage,
-        image2: receivedImage,
+        image1: receivedImage,
+        image2: snapshotImage,
         colorThreshold,
         detectAntialiasing,
     });

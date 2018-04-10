@@ -1,6 +1,8 @@
 export interface SnapshotState {
     _counters: Map<string, number>;
     _updateSnapshot: "new" | "all" | "none";
+    updated: number;
+    added: number;
 }
 
 export interface JestTestConfiguration {
@@ -17,14 +19,19 @@ export interface MatcherResult {
 
 export function isSnapshotState(obj: any): obj is SnapshotState {
     if (typeof obj !== "object") { return false; }
-    const { _counters } = obj;
-    if (typeof _counters !== "object") { return false; }
-    if (typeof _counters.get !== "function") { return false; }
+    if (obj === null) { return false; }
+    const { _counters, _updateSnapshot, updated, added } = obj;
+    if (!(_counters instanceof Map)) { return false; }
+    const isUpdateSnapshot = _updateSnapshot === "new" || _updateSnapshot === "none" || _updateSnapshot === "all";
+    if (!isUpdateSnapshot) { return false; }
+    if (typeof updated !== "number") { return false; }
+    if (typeof added !== "number") { return false; }
     return true;
 }
 
 export function isJestTestConfiguration(obj: any): obj is JestTestConfiguration {
     if (typeof obj !== "object") { return false; }
+    if (obj === null) { return false; }
     const { snapshotState, testPath, currentTestName, isNot } = obj;
     if (typeof testPath !== "string") { return false; }
     if (typeof currentTestName !== "string") { return false; }

@@ -1,5 +1,5 @@
 import { SnapshotState } from "./jest";
-import { ToMatchImageSnapshotConfiguration } from "./to-match-image-snapshot";
+import { IdentifierGenerator, ReportPathGenerator } from "./to-match-image-snapshot";
 import * as path from "path";
 import kebabCase = require("lodash.kebabcase"); // tslint:disable-line
 
@@ -19,7 +19,7 @@ export function getSnapshotFileName(
     testPath: string,
     currentTestName: string,
     snapshotState: SnapshotState,
-    { identifier }: ToMatchImageSnapshotConfiguration,
+    identifier?: IdentifierGenerator,
 ) {
     const counter = (snapshotState._counters.get(currentTestName) || 0) + 1;
     if (typeof identifier === "function") {
@@ -49,10 +49,10 @@ export function getSnapshotPath(
     testPath: string,
     currentTestName: string,
     snapshotState: SnapshotState,
-    configuration: ToMatchImageSnapshotConfiguration,
+    snapshotsDir?: string,
+    identifier?: IdentifierGenerator,
 ) {
-    const { snapshotsDir } = configuration;
-    const fileName = getSnapshotFileName(testPath, currentTestName, snapshotState, configuration);
+    const fileName = getSnapshotFileName(testPath, currentTestName, snapshotState, identifier);
     return path.join(path.dirname(testPath), snapshotsDir || "__snapshots__", fileName);
 }
 
@@ -60,10 +60,9 @@ export function getReportPath(
     testPath: string,
     currentTestName: string,
     snapshotState: SnapshotState,
-    configuration: ToMatchImageSnapshotConfiguration,
+    reportPath: ReportPathGenerator,
 ) {
     const counter = (snapshotState._counters.get(currentTestName) || 0) + 1;
-    const { reportPath } = configuration;
     if (reportPath === null) { return; }
     if (typeof reportPath === "undefined") {
         return path.join(

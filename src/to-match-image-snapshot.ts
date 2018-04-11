@@ -1,11 +1,15 @@
 import { decode, readPngFileSync, writePngFileSync, PngImage } from "node-libpng";
-import { diffImages } from "native-image-diff";
+import { diffImages, DiffImage } from "native-image-diff";
 import chalk from "chalk";
 import { existsSync, writeFileSync, readFileSync } from "fs";
 import { getSnapshotPath, getReportPath } from "./filenames";
 import { SnapshotState, isJestTestConfiguration, MatcherResult } from "./jest";
 import { sync as mkdirp } from "mkdirp";
 import { dirname, join } from "path";
+
+export type IdentifierGenerator = (testPath: string, currentTestName: string, counter: number) => string;
+
+export type ReportPathGenerator = (testPath: string, currentTestName: string, counter: number) => string;
 
 /**
  * Used as configuration for `toMatchImageSnapshot`.
@@ -39,7 +43,7 @@ export interface ToMatchImageSnapshotConfiguration {
     /**
      * An optional generator function for generating the names for the image snapshot files.
      */
-    identifier?: (testPath: string, currentTestName: string, counter: number) => string;
+    identifier?: IdentifierGenerator;
     /**
      * An optional directory name to store the snapshots in. Defaults to `__snapshots__`.
      */
@@ -48,7 +52,7 @@ export interface ToMatchImageSnapshotConfiguration {
      * The directory to write the report to. Defaults to a directory `jest-screenshot-reports` in
      * the projects root directory. Can be set to `null` to explicitly disable generating reports.
      */
-    reportPath?: (testPath: string, currentTestName: string, counter: number) => string;
+    reportPath?: ReportPathGenerator;
 }
 
 /**
@@ -66,7 +70,7 @@ function checkImages(
     receivedImage: PngImage,
     snapshotNumber: number,
     configuration: ToMatchImageSnapshotConfiguration,
-): MatcherResult & { diffImage?: { data: Buffer, width: number, height: number } } {
+): MatcherResult & { diffImage?: DiffImage } {
     const {
         colorThreshold,
         detectAntialiasing,
@@ -124,6 +128,7 @@ export function toMatchImageSnapshot(
     received: Buffer,
     configuration: ToMatchImageSnapshotConfiguration,
 ): MatcherResult {
+    const { identifier, snapshotsDir, reportPath: reportPathGenerator } = configuration;
     // Check whether `this` is really the expected Jest configuration.
     if (!isJestTestConfiguration(this)) {
         throw new Error("Jest: Attempted to call `.toMatchImageSnapshot()` outside of Jest context.");
@@ -134,8 +139,8 @@ export function toMatchImageSnapshot(
     }
     let { snapshotState } = this;
     const { _updateSnapshot } = snapshotState;
-    const snapshotPath = getSnapshotPath(testPath, currentTestName, snapshotState, configuration);
-    const reportPath = getReportPath(testPath, currentTestName, snapshotState, configuration);
+    const snapshotPath = getSnapshotPath(testPath, currentTestName, snapshotState, snapshotsDir, identifier);
+    const reportPath = getReportPath(testPath, currentTestName, snapshotState, reportPathGenerator);
     // Create the path to store the snapshots in.
     mkdirp(dirname(snapshotPath));
     // The image did not yet exist.

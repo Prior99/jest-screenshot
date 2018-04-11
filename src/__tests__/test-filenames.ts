@@ -22,7 +22,7 @@ describe("getSnapshotFileName", () => {
                 expect(counter).toBe(8);
                 return expected;
             };
-            expect(getSnapshotFileName(somePath, someTestName, someSnapshotState, { identifier })).toBe(expected);
+            expect(getSnapshotFileName(somePath, someTestName, someSnapshotState, identifier)).toBe(expected);
         });
 
         it("appends `.snap.png` if the generator didn't append it", () => {
@@ -31,32 +31,32 @@ describe("getSnapshotFileName", () => {
             const identifier = () => {
                 return returned;
             };
-            expect(getSnapshotFileName(somePath, someTestName, someSnapshotState, { identifier })).toBe(expected);
+            expect(getSnapshotFileName(somePath, someTestName, someSnapshotState, identifier)).toBe(expected);
         });
 
         it("throws an error if the generator wasn't a function but also not `undefined`", () => {
             const identifier = 89 as any;
             expect(() => {
-                getSnapshotFileName(somePath, someTestName, someSnapshotState, { identifier });
+                getSnapshotFileName(somePath, someTestName, someSnapshotState, identifier);
             }).toThrowErrorMatchingSnapshot();
         });
     });
 
     it("generates the expected default file name with no generator specified", () => {
-        expect(getSnapshotFileName(somePath, someTestName, someSnapshotState, {})).toBe(expectedGeneratedName);
+        expect(getSnapshotFileName(somePath, someTestName, someSnapshotState)).toBe(expectedGeneratedName);
     });
 });
 
 describe("getSnapshotPath", () => {
     it("returns the expected path", () => {
         const expectedGeneratedPath = `/tmp/__snapshots__/${expectedGeneratedName}`;
-        expect(getSnapshotPath(somePath, someTestName, someSnapshotState, {})).toBe(expectedGeneratedPath);
+        expect(getSnapshotPath(somePath, someTestName, someSnapshotState)).toBe(expectedGeneratedPath);
     });
 
     it("returns the expected path with a custom directory specified", () => {
         const snapshotsDir = "__some_directory__";
         const expectedGeneratedPath = `/tmp/__some_directory__/${expectedGeneratedName}`;
-        const path = getSnapshotPath(somePath, someTestName, someSnapshotState, { snapshotsDir });
+        const path = getSnapshotPath(somePath, someTestName, someSnapshotState, snapshotsDir);
         expect(path).toBe(expectedGeneratedPath);
     });
 });

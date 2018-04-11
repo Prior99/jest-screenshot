@@ -1,4 +1,5 @@
 import { ToMatchImageSnapshotConfiguration, toMatchImageSnapshot } from "./to-match-image-snapshot";
+import { sync as mkdirp } from "mkdirp";
 
 /**
  * This function is used to setup and initialize **jest-screenshot**. It should be used in

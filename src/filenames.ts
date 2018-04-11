@@ -1,7 +1,7 @@
 import { SnapshotState } from "./jest";
 import { ToMatchImageSnapshotConfiguration } from "./to-match-image-snapshot";
 import * as path from "path";
-import kebabCase from "lodash.kebabcase";
+import kebabCase = require("lodash.kebabcase"); // tslint:disable-line
 
 /**
  * Calculates the filename for an individual image snapshot file.
@@ -54,4 +54,24 @@ export function getSnapshotPath(
     const { snapshotsDir } = configuration;
     const fileName = getSnapshotFileName(testPath, currentTestName, snapshotState, configuration);
     return path.join(path.dirname(testPath), snapshotsDir || "__snapshots__", fileName);
+}
+
+export function getReportPath(
+    testPath: string,
+    currentTestName: string,
+    snapshotState: SnapshotState,
+    configuration: ToMatchImageSnapshotConfiguration,
+) {
+    const counter = (snapshotState._counters.get(currentTestName) || 0) + 1;
+    const { reportPath } = configuration;
+    if (reportPath === null) { return; }
+    if (typeof reportPath === "undefined") {
+        return path.join(
+            "jest-screenshot-reports",
+            path.basename(testPath),
+            kebabCase(currentTestName),
+            String(counter),
+        );
+    }
+    return reportPath(testPath, currentTestName, counter);
 }

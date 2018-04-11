@@ -9,8 +9,7 @@
         "jsx": "react",
         "outDir": "dist",
         "lib": ["es2016"],
-        "moduleResolution": "node",
-        "allowSyntheticDefaultImports": true
+        "moduleResolution": "node"
     },
     "exclude": [
         "**/__tests__/*",

@@ -1,9 +1,11 @@
 import { decode, readPngFileSync, writePngFileSync, PngImage } from "node-libpng";
 import { diffImages } from "native-image-diff";
 import chalk from "chalk";
-import { existsSync, writeFileSync } from "fs";
-import { getSnapshotPath } from "./filenames";
+import { existsSync, writeFileSync, readFileSync } from "fs";
+import { getSnapshotPath, getReportPath } from "./filenames";
 import { SnapshotState, isJestTestConfiguration, MatcherResult } from "./jest";
+import { sync as mkdirp } from "mkdirp";
+import { dirname, join } from "path";
 
 /**
  * Used as configuration for `toMatchImageSnapshot`.
@@ -37,11 +39,16 @@ export interface ToMatchImageSnapshotConfiguration {
     /**
      * An optional generator function for generating the names for the image snapshot files.
      */
-    identifier?: ((testPath: string, currentTestName: string, counter: number) => string);
+    identifier?: (testPath: string, currentTestName: string, counter: number) => string;
     /**
      * An optional directory name to store the snapshots in. Defaults to `__snapshots__`.
      */
     snapshotsDir?: string;
+    /**
+     * The directory to write the report to. Defaults to a directory `jest-screenshot-reports` in
+     * the projects root directory. Can be set to `null` to explicitly disable generating reports.
+     */
+    reportPath?: (testPath: string, currentTestName: string, counter: number) => string;
 }
 
 /**
@@ -59,7 +66,7 @@ function checkImages(
     receivedImage: PngImage,
     snapshotNumber: number,
     configuration: ToMatchImageSnapshotConfiguration,
-): MatcherResult {
+): MatcherResult & { diffImage?: { data: Buffer, width: number, height: number } } {
     const {
         colorThreshold,
         detectAntialiasing,
@@ -67,7 +74,7 @@ function checkImages(
         pixelThresholdRelative,
     } = configuration;
     // Perform the actual image diff.
-    const { pixels: changedPixels, image } = diffImages({
+    const { pixels: changedPixels, image: diffImage } = diffImages({
         image1: receivedImage,
         image2: snapshotImage,
         colorThreshold,
@@ -82,6 +89,7 @@ function checkImages(
                 `${preamble}\n\n` +
                 `Expected less than ${chalk.green(`${pixelThresholdAbsolute} pixels`)} to have changed, ` +
                 `but ${chalk.red(`${changedPixels} pixels`)} changed.`,
+            diffImage,
         };
     }
     const snapshotImagePixels = snapshotImage.width * snapshotImage.height;
@@ -97,6 +105,7 @@ function checkImages(
                 `${preamble}\n\n` +
                 `Expected less than ${chalk.green(`${percentThreshold}%`)} of the pixels to have changed, ` +
                 `but ${chalk.red(`${percentChanged}%`)} of the pixels changed.`,
+            diffImage,
         };
     }
     return { pass: true };
@@ -126,6 +135,9 @@ export function toMatchImageSnapshot(
     let { snapshotState } = this;
     const { _updateSnapshot } = snapshotState;
     const snapshotPath = getSnapshotPath(testPath, currentTestName, snapshotState, configuration);
+    const reportPath = getReportPath(testPath, currentTestName, snapshotState, configuration);
+    // Create the path to store the snapshots in.
+    mkdirp(dirname(snapshotPath));
     // The image did not yet exist.
     if (!existsSync(snapshotPath)) {
         // If the user specified `-u`, or was running in interactive mode, write the new
@@ -149,12 +161,20 @@ export function toMatchImageSnapshot(
     const receivedImage = decode(received);
     // Perform the actual diff of the images.
     const snapshotNumber = snapshotState._counters.get(currentTestName) || 1;
-    const { pass, message } = checkImages(snapshotImage, receivedImage, snapshotNumber, configuration);
+    const { pass, message, diffImage } = checkImages(snapshotImage, receivedImage, snapshotNumber, configuration);
     // If the user specified `-u` and the snapshot changed, update the stored snapshot.
-    if (!pass && _updateSnapshot === "all") {
-        snapshotState.updated++;
-        writeFileSync(snapshotPath, received);
-        return { pass: true };
+    if (!pass) {
+        if (_updateSnapshot === "all") {
+            snapshotState.updated++;
+            writeFileSync(snapshotPath, received);
+            return { pass: true };
+        }
+        if (reportPath) {
+            mkdirp(reportPath);
+            writeFileSync(join(reportPath, "received.png"), received);
+            writeFileSync(join(reportPath, "snapshot.png"), readFileSync(snapshotPath));
+            writePngFileSync(join(reportPath, "diff.png"), diffImage.data, diffImage);
+        }
     }
     return { pass, message };
 }

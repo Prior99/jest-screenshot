@@ -1,9 +1,9 @@
 import puppeteer from 'puppeteer';
 import { jestScreenshot } from 'jest-screenshot';
 
-expect.extend(jestScreenshot({
+setupJestScreenshot({
     colorThreshold: 0,
-}));
+});
 
 beforeAll(async () => {
     try {

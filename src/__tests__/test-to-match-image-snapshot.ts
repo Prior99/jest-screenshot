@@ -1,4 +1,4 @@
-import { jestScreenshot } from "..";
+import { setupJestScreenshot } from "..";
 import { toMatchImageSnapshot } from "../to-match-image-snapshot";
 import { SnapshotState, JestTestConfiguration } from "../jest";
 import { readFileSync, unlinkSync, existsSync, writeFileSync } from "fs";
@@ -23,7 +23,7 @@ describe("toMatchImageSnapshot", () => {
     let originalUpdateSnapshot: "new" | "all" | "none";
 
     beforeEach(() => {
-        expect.extend(jestScreenshot());
+        setupJestScreenshot();
     });
 
     beforeEach(() => {
@@ -49,7 +49,7 @@ describe("toMatchImageSnapshot", () => {
             { colorThreshold: 0.6 },
         ].forEach(({ colorThreshold }) => {
             it(`with a color threshold of ${colorThreshold} detects the snapshot as not matching`, () => {
-                expect.extend(jestScreenshot({ colorThreshold }));
+                setupJestScreenshot({ colorThreshold });
                 expect(() => {
                     expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
                 }).toThrowErrorMatchingSnapshot();
@@ -61,7 +61,7 @@ describe("toMatchImageSnapshot", () => {
             { colorThreshold: 1.0 },
         ].forEach(({ colorThreshold }) => {
             it(`with a color threshold of ${colorThreshold} detects the snapshot as matching`, () => {
-                expect.extend(jestScreenshot({ colorThreshold }));
+                setupJestScreenshot({ colorThreshold });
                 expect(() => {
                     expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
                 }).not.toThrowError();
@@ -74,7 +74,7 @@ describe("toMatchImageSnapshot", () => {
 
         it("fails with an absolute threshold of 204", () => {
             const pixelThresholdAbsolute = 204;
-            expect.extend(jestScreenshot({ colorThreshold, pixelThresholdAbsolute }));
+            setupJestScreenshot({ colorThreshold, pixelThresholdAbsolute });
             expect(() => {
                 expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
             }).toThrowErrorMatchingSnapshot();
@@ -82,7 +82,7 @@ describe("toMatchImageSnapshot", () => {
 
         it("passes with an absolute threshold of 205", () => {
             const pixelThresholdAbsolute = 205;
-            expect.extend(jestScreenshot({ colorThreshold, pixelThresholdAbsolute }));
+            setupJestScreenshot({ colorThreshold, pixelThresholdAbsolute });
             expect(() => {
                 expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
             }).not.toThrowError();

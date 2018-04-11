@@ -21,12 +21,12 @@ Please also refer to the **[Documentation](https://prior99.github.io/jest-screen
 
 ## Usage
 
-Integrate this plugin by using jest's `expect.extend`:
+Integrate this plugin by calling `setupJestScreenshot`:
 
 ```typescript
-import { jestScreenshot } from "jest-screenshot";
+import { setupJestScreenshot } from "jest-screenshot";
 
-expect.extend(jestScreenshot());
+setupJestScreenshot();
 ```
 
 Take a look at [the example project](example/).
@@ -73,12 +73,12 @@ describe("My fancy webpage", () => {
 ```typescript
 import { jestScreenshot } from "jest-screenshot";
 
-expect.extend(jestScreenshot({
+setupJestScreenshot({
     detectAntialiasing: false,
     colorThreshold: 0,
     pixelThresholdAbsolute: 150, // Fail if more than 150 pixels in total changed.
     pixelThresholdRelative: 0.5 // Fail if more than 50% of the pixels changed.
-}));
+});
 ```
 
 If neither `pixelThresholdAbsolute` nor `pixelThresholdRelative` are specified, `pixelThresholdRelative` will be set to `0`.

@@ -1,1 +1,1 @@
-export const toMatchImageSnapshot = jest.fn();
+export const toMatchImageSnapshot = jest.fn(() => ({ pass: true }));

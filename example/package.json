@@ -1,0 +1,29 @@
+{
+    "name": "jest-screenshot-example",
+    "scripts": {
+        "test": "jest"
+    },
+    "jest": {
+        "collectCoverage": false,
+        "moduleFileExtensions": [
+            "js"
+        ],
+        "testMatch": [
+            "**/__tests__/*.js"
+        ],
+        "transform": {
+            ".*\\.js$": "babel-jest"
+        },
+        "modulePaths": [
+            "node_modules"
+        ],
+        "setupTestFrameworkScriptFile": "<rootDir>/jest-integration-framework-setup.js"
+    },
+    "devDependencies": {
+        "babel-jest": "^22.4.3",
+        "babel-preset-env": "^1.6.1",
+        "jest": "^21.2.1",
+        "jest-screenshot": "file:..",
+        "puppeteer": "^1.0.0"
+    }
+}

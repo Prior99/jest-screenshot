@@ -1,4 +1,7 @@
 const path = require("path");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+const extractCSS = new ExtractTextPlugin('[name].css');
 
 module.exports = {
     entry: {
@@ -22,8 +25,36 @@ module.exports = {
                     /__tests__/,
                     /dist/,
                 ],
-            }
-        ]
+            },
+            {
+                test: /\.(s[ac]ss)$/,
+                loader: extractCSS.extract({
+                    use: [
+                        {
+                            loader: "css-loader",
+                            options: {
+                                modules: true,
+                                importLoaders: 1,
+                                localIdentName: '[name]_[local]_[hash:base64:5]',
+                                sourceMap: true,
+                            }
+                        },
+                        {
+                            loader: "resolve-url-loader",
+                        },
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                sourceMap: true,
+                            },
+                        },
+                    ],
+                }),
+            },
+        ],
     },
+    plugins: [
+        extractCSS,
+    ],
     devtool: "source-map",
 }

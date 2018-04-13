@@ -8,7 +8,8 @@
         "experimentalDecorators": true,
         "outDir": "dist",
         "lib": ["es2016", "dom"],
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "jsx": "react"
     },
     "exclude": [
         "node_modules.",

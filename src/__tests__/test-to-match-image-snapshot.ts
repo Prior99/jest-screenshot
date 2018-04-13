@@ -29,6 +29,11 @@ describe("toMatchImageSnapshot", () => {
     beforeEach(() => {
         testConfig = getJestTestConfiguration();
         originalUpdateSnapshot = testConfig.snapshotState._updateSnapshot;
+        try {
+            unlinkSync(`${process.cwd()}/jest-screenshot.json`);
+        } catch (err) {
+            return;
+        }
     });
 
     afterEach(() => {
@@ -49,7 +54,8 @@ describe("toMatchImageSnapshot", () => {
             { colorThreshold: 0.6 },
         ].forEach(({ colorThreshold }) => {
             it(`with a color threshold of ${colorThreshold} detects the snapshot as not matching`, () => {
-                setupJestScreenshot({ colorThreshold });
+                writeFileSync(`${process.cwd()}/jest-screenshot.json`, JSON.stringify({ colorThreshold }));
+                setupJestScreenshot();
                 expect(() => {
                     expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
                 }).toThrowErrorMatchingSnapshot();
@@ -61,7 +67,8 @@ describe("toMatchImageSnapshot", () => {
             { colorThreshold: 1.0 },
         ].forEach(({ colorThreshold }) => {
             it(`with a color threshold of ${colorThreshold} detects the snapshot as matching`, () => {
-                setupJestScreenshot({ colorThreshold });
+                writeFileSync(`${process.cwd()}/jest-screenshot.json`, JSON.stringify({ colorThreshold }));
+                setupJestScreenshot();
                 expect(() => {
                     expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
                 }).not.toThrowError();
@@ -74,7 +81,11 @@ describe("toMatchImageSnapshot", () => {
 
         it("fails with an absolute threshold of 204", () => {
             const pixelThresholdAbsolute = 204;
-            setupJestScreenshot({ colorThreshold, pixelThresholdAbsolute });
+            writeFileSync(`${process.cwd()}/jest-screenshot.json`, JSON.stringify({
+                colorThreshold,
+                pixelThresholdAbsolute,
+            }));
+            setupJestScreenshot();
             expect(() => {
                 expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
             }).toThrowErrorMatchingSnapshot();
@@ -82,7 +93,11 @@ describe("toMatchImageSnapshot", () => {
 
         it("passes with an absolute threshold of 205", () => {
             const pixelThresholdAbsolute = 205;
-            setupJestScreenshot({ colorThreshold, pixelThresholdAbsolute });
+            writeFileSync(`${process.cwd()}/jest-screenshot.json`, JSON.stringify({
+                colorThreshold,
+                pixelThresholdAbsolute,
+            }));
+            setupJestScreenshot();
             expect(() => {
                 expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
             }).not.toThrowError();
@@ -106,7 +121,7 @@ describe("toMatchImageSnapshot", () => {
     });
 
     describe("with the snapshot not matching", () => {
-        const snapshotToUpdatePath = `${__dirname}/__snapshots__/test-to-match-image-snapshot-ts-to-match-image-snapshot-with-the-snapshot-not-matching-updates-the-snapshot-when-updating-is-enabled-1.snap.png`; // tslint:disable-line
+        const snapshotToUpdatePath = `${__dirname}/__snapshots__/test-to-match-image-snapshot-ts-to-match-image-snapshot-with-the-snapshot-not-matching-updates-the-snapshot-when-updating-is-enabled-1-d8503.snap.png`; // tslint:disable-line
         const originalContent = readFileSync(snapshotToUpdatePath);
 
         afterEach(() => {
@@ -136,7 +151,7 @@ describe("toMatchImageSnapshot", () => {
     });
 
     describe("with the snapshot not existing", () => {
-        const snapshotToCreatePath = `${__dirname}/__snapshots__/test-to-match-image-snapshot-ts-to-match-image-snapshot-with-the-snapshot-not-existing-creates-the-snapshot-when-updating-is-enabled-1.snap.png`; // tslint:disable-line
+        const snapshotToCreatePath = `${__dirname}/__snapshots__/test-to-match-image-snapshot-ts-to-match-image-snapshot-with-the-snapshot-not-existing-creates-the-snapshot-when-updating-is-enabled-1-14292.snap.png`; // tslint:disable-line
 
         afterEach(() => {
             try {

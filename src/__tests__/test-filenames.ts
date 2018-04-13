@@ -9,39 +9,10 @@ const someSnapshotState: SnapshotState = {
     updated: 0,
     added: 0,
 };
-const expectedGeneratedName = "some-test-ts-something-with-some-parameters-does-expected-things-8.snap.png";
+const expectedGeneratedName = "some-test-ts-something-with-some-parameters-does-expected-things-8-223bb.snap.png";
 someSnapshotState._counters.set(someTestName, 7);
 
 describe("getSnapshotFileName", () => {
-    describe("with a custom identifier generator", () => {
-        it("uses the generator", () => {
-            const expected = "some-generated-filename-identifier.snap.png";
-            const identifier = (testPath: string, currentTestName: string, counter: number) => {
-                expect(testPath).toBe(somePath);
-                expect(currentTestName).toBe(someTestName);
-                expect(counter).toBe(8);
-                return expected;
-            };
-            expect(getSnapshotFileName(somePath, someTestName, someSnapshotState, identifier)).toBe(expected);
-        });
-
-        it("appends `.snap.png` if the generator didn't append it", () => {
-            const expected = "some-generated-filename-identifier.snap.png";
-            const returned = "some-generated-filename-identifier";
-            const identifier = () => {
-                return returned;
-            };
-            expect(getSnapshotFileName(somePath, someTestName, someSnapshotState, identifier)).toBe(expected);
-        });
-
-        it("throws an error if the generator wasn't a function but also not `undefined`", () => {
-            const identifier = 89 as any;
-            expect(() => {
-                getSnapshotFileName(somePath, someTestName, someSnapshotState, identifier);
-            }).toThrowErrorMatchingSnapshot();
-        });
-    });
-
     it("generates the expected default file name with no generator specified", () => {
         expect(getSnapshotFileName(somePath, someTestName, someSnapshotState)).toBe(expectedGeneratedName);
     });

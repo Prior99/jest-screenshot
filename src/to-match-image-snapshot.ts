@@ -5,54 +5,14 @@ import { existsSync, writeFileSync, readFileSync } from "fs";
 import { getSnapshotPath, getReportPath } from "./filenames";
 import { SnapshotState, isJestTestConfiguration, MatcherResult } from "./jest";
 import { sync as mkdirp } from "mkdirp";
-import { dirname, join } from "path";
+import * as path from "path";
+import { JestScreenshotConfiguration } from "./config";
 
-export type IdentifierGenerator = (testPath: string, currentTestName: string, counter: number) => string;
-
-export type ReportPathGenerator = (testPath: string, currentTestName: string, counter: number) => string;
-
-/**
- * Used as configuration for `toMatchImageSnapshot`.
- */
-export interface ToMatchImageSnapshotConfiguration {
-    /**
-     * Passed to **native-image-diff**. Will disable or enable antialiasing detection.
-     * Defaults to `true`.
-     */
-    detectAntialiasing?: boolean;
-    /**
-     * Passed to **native-image-diff**. Specifies the threshold on a scale from `0` to `1`
-     * for when a pixel counts as changed. `0` allows no difference between two pixels and
-     * `1` detects no difference between a white and a black pixel.
-     */
-    colorThreshold?: number;
-    /**
-     * If specified, makes the test check for the absolute number of pixels changed. When for example
-     * set to `100`, An image which differs from it's snapshot by `101` pixels would fail.
-     *
-     * Is set to `undefined` by default and hence the check is disabled.
-     */
-    pixelThresholdAbsolute?: number;
-    /**
-     * If specified, makes the test check for the relative number of pixels changed. When for example
-     * set to `0.5`, An image which differs from it's snapshot by 50.0001% of the pixels would fail.
-     *
-     * Is set to `0` if neither `pixelThresholdAbsolute` nor `pixelThresholdRelative` are confiured.
-     */
-    pixelThresholdRelative?: number;
-    /**
-     * An optional generator function for generating the names for the image snapshot files.
-     */
-    identifier?: IdentifierGenerator;
-    /**
-     * An optional directory name to store the snapshots in. Defaults to `__snapshots__`.
-     */
-    snapshotsDir?: string;
-    /**
-     * The directory to write the report to. Defaults to a directory `jest-screenshot-reports` in
-     * the projects root directory. Can be set to `null` to explicitly disable generating reports.
-     */
-    reportPath?: ReportPathGenerator;
+interface ImageMatcherResult extends MatcherResult {
+    diffImage?: DiffImage;
+    changedRelative?: number;
+    totalPixels?: number;
+    changedPixels?: number;
 }
 
 /**
@@ -69,8 +29,8 @@ function checkImages(
     snapshotImage: PngImage,
     receivedImage: PngImage,
     snapshotNumber: number,
-    configuration: ToMatchImageSnapshotConfiguration,
-): MatcherResult & { diffImage?: DiffImage } {
+    configuration: JestScreenshotConfiguration,
+): ImageMatcherResult {
     const {
         colorThreshold,
         detectAntialiasing,
@@ -86,6 +46,10 @@ function checkImages(
     });
     const expected = `stored snapshot ${snapshotNumber}`;
     const preamble = `${chalk.red("Received value")} does not match ${chalk.green(expected)}.`;
+    const snapshotImagePixels = snapshotImage.width * snapshotImage.height;
+    const receivedImagePixels = receivedImage.width * receivedImage.height;
+    const totalPixels = Math.max(snapshotImagePixels, receivedImagePixels);
+    const changedRelative = changedPixels / totalPixels;
     if (typeof pixelThresholdAbsolute === "number" && changedPixels > pixelThresholdAbsolute) {
         return {
             pass: false,
@@ -94,12 +58,11 @@ function checkImages(
                 `Expected less than ${chalk.green(`${pixelThresholdAbsolute} pixels`)} to have changed, ` +
                 `but ${chalk.red(`${changedPixels} pixels`)} changed.`,
             diffImage,
+            changedRelative,
+            totalPixels,
+            changedPixels,
         };
     }
-    const snapshotImagePixels = snapshotImage.width * snapshotImage.height;
-    const receivedImagePixels = receivedImage.width * receivedImage.height;
-    const totalPixels = Math.max(snapshotImagePixels, receivedImagePixels);
-    const changedRelative = changedPixels / totalPixels;
     if (typeof pixelThresholdRelative === "number" && changedRelative > pixelThresholdRelative) {
         const percentThreshold = (pixelThresholdRelative * 100).toFixed(2);
         const percentChanged = (changedRelative * 100).toFixed(2);
@@ -110,6 +73,9 @@ function checkImages(
                 `Expected less than ${chalk.green(`${percentThreshold}%`)} of the pixels to have changed, ` +
                 `but ${chalk.red(`${percentChanged}%`)} of the pixels changed.`,
             diffImage,
+            changedRelative,
+            totalPixels,
+            changedPixels,
         };
     }
     return { pass: true };
@@ -126,9 +92,10 @@ function checkImages(
  */
 export function toMatchImageSnapshot(
     received: Buffer,
-    configuration: ToMatchImageSnapshotConfiguration,
+    configuration: JestScreenshotConfiguration,
 ): MatcherResult {
-    const { identifier, snapshotsDir, reportPath: reportPathGenerator } = configuration;
+    (process as any).lol = "ROFL";
+    const { snapshotsDir, reportDir } = configuration;
     // Check whether `this` is really the expected Jest configuration.
     if (!isJestTestConfiguration(this)) {
         throw new Error("Jest: Attempted to call `.toMatchImageSnapshot()` outside of Jest context.");
@@ -139,10 +106,10 @@ export function toMatchImageSnapshot(
     }
     let { snapshotState } = this;
     const { _updateSnapshot } = snapshotState;
-    const snapshotPath = getSnapshotPath(testPath, currentTestName, snapshotState, snapshotsDir, identifier);
-    const reportPath = getReportPath(testPath, currentTestName, snapshotState, reportPathGenerator);
+    const snapshotPath = getSnapshotPath(testPath, currentTestName, snapshotState, snapshotsDir);
+    const reportPath = getReportPath(testPath, currentTestName, snapshotState, reportDir);
     // Create the path to store the snapshots in.
-    mkdirp(dirname(snapshotPath));
+    mkdirp(path.dirname(snapshotPath));
     // The image did not yet exist.
     if (!existsSync(snapshotPath)) {
         // If the user specified `-u`, or was running in interactive mode, write the new
@@ -166,8 +133,14 @@ export function toMatchImageSnapshot(
     const receivedImage = decode(received);
     // Perform the actual diff of the images.
     const snapshotNumber = snapshotState._counters.get(currentTestName) || 1;
-    const { pass, message, diffImage } = checkImages(snapshotImage, receivedImage, snapshotNumber, configuration);
-    // If the user specified `-u` and the snapshot changed, update the stored snapshot.
+    const {
+        pass,
+        message,
+        diffImage,
+        changedRelative,
+        totalPixels,
+        changedPixels,
+    } = checkImages(snapshotImage, receivedImage, snapshotNumber, configuration);
     if (!pass) {
         if (_updateSnapshot === "all") {
             snapshotState.updated++;
@@ -176,9 +149,21 @@ export function toMatchImageSnapshot(
         }
         if (reportPath) {
             mkdirp(reportPath);
-            writeFileSync(join(reportPath, "received.png"), received);
-            writeFileSync(join(reportPath, "snapshot.png"), readFileSync(snapshotPath));
-            writePngFileSync(join(reportPath, "diff.png"), diffImage.data, diffImage);
+            const receivedPath = path.join(reportPath, "received.png");
+            const diffPath = path.join(reportPath, "diff.png");
+            const snapshotPathReport = path.join(reportPath, "snapshot.png");
+            writeFileSync(receivedPath, received);
+            writePngFileSync(diffPath, diffImage.data, diffImage);
+            writeFileSync(receivedPath, received);
+            writeFileSync(snapshotPathReport, readFileSync(snapshotPath));
+            writePngFileSync(diffPath, diffImage.data, diffImage);
+            writeFileSync(path.join(reportPath, "info.json"), JSON.stringify({
+                testName: currentTestName,
+                message: message(),
+                changedRelative,
+                totalPixels,
+                changedPixels,
+            }));
         }
     }
     return { pass, message };

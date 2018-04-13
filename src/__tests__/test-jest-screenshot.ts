@@ -13,20 +13,4 @@ describe("jestScreenshot", () => {
             { pixelThresholdRelative: 0 },
         );
     });
-
-    it("returns an object with `toMatchImageSnapshot` set", () => {
-        setupJestScreenshot({
-            detectAntialiasing: true,
-            pixelThresholdAbsolute: 100,
-        });
-        expect(expect("test").toMatchImageSnapshot).toBeTruthy();
-        expect(someBuffer).toMatchImageSnapshot();
-        expect(toMatchImageSnapshot).toHaveBeenCalledWith(
-            someBuffer,
-            {
-                detectAntialiasing: true,
-                pixelThresholdAbsolute: 100,
-            },
-        );
-    });
 });

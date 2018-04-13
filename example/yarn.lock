@@ -2075,7 +2075,7 @@ jest-runtime@^21.2.1:
     chalk "^2.3.2"
     lodash.kebabcase "^4.1.1"
     mkdirp "^0.5.1"
-    native-image-diff "^0.1.0"
+    native-image-diff "^0.1.1"
     node-libpng "^0.2.0"
 
 jest-snapshot@^21.2.1:
@@ -2432,9 +2432,9 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-native-image-diff@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/native-image-diff/-/native-image-diff-0.1.0.tgz#2ec3e158e5c31fc5bf24eadbceb4a598f03851e2"
+native-image-diff@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/native-image-diff/-/native-image-diff-0.1.1.tgz#ecb1a5e22580d45c3933d072590960cbfcbec2e9"
   dependencies:
     request "^2.85.0"
 

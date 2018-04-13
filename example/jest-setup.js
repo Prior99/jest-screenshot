@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-import { jestScreenshot } from 'jest-screenshot';
+import { setupJestScreenshot } from 'jest-screenshot';
 
 setupJestScreenshot({
     colorThreshold: 0,

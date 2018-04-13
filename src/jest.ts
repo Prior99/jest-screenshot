@@ -15,6 +15,8 @@ export interface JestTestConfiguration {
 export interface MatcherResult {
     message?(): string;
     pass: boolean;
+    actual?: string;
+    expected?: string;
 }
 
 /**

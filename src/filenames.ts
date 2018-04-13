@@ -1,7 +1,14 @@
 import { SnapshotState } from "./jest";
-import { IdentifierGenerator, ReportPathGenerator } from "./to-match-image-snapshot";
 import * as path from "path";
+import { createHash } from "crypto";
 import kebabCase = require("lodash.kebabcase"); // tslint:disable-line
+
+const suffix = ".snap.png";
+const checksumLength = 5;
+const maxTestFilenameLength = 75;
+// Windows allows a maximum of 255 characters. The suffix length as well as the length of two `-` and
+// the length of the md5-hash need to be subtracted.
+const maxFilenameLength = 255 - suffix.length - checksumLength - 3 - maxTestFilenameLength;
 
 /**
  * Calculates the filename for an individual image snapshot file.
@@ -15,24 +22,17 @@ import kebabCase = require("lodash.kebabcase"); // tslint:disable-line
  *
  * @return A string used as a filename for the current snapshot.
  */
-export function getSnapshotFileName(
-    testPath: string,
-    currentTestName: string,
-    snapshotState: SnapshotState,
-    identifier?: IdentifierGenerator,
-) {
+export function getSnapshotFileName(testPath: string, currentTestName: string, snapshotState: SnapshotState) {
+    // MD5 Hash generator.
+    const md5 = createHash("md5");
+    // Counter for the n-th snapshot in the test.
     const counter = (snapshotState._counters.get(currentTestName) || 0) + 1;
-    if (typeof identifier === "function") {
-        const fileName = identifier(testPath, currentTestName, counter);
-        if (fileName.toLowerCase().endsWith(".snap.png")) {
-            return fileName;
-        }
-        return `${fileName}.snap.png`;
-    }
-    if (typeof identifier !== "undefined") {
-        throw new Error("Jest: Invalid configuration for `.toMatchImageSnapshot`: `identifier` must be a function.");
-    }
-    return `${kebabCase(path.basename(testPath))}-${kebabCase(currentTestName)}-${counter}.snap.png`;
+    // Generate the test filename and identifier path for the maximum windows filename length.
+    const testFileNamePart = kebabCase(path.basename(testPath).substr(0, 75));
+    const identifierPart = kebabCase(currentTestName.substr(0, maxFilenameLength - String(counter).length));
+    const fileNameStart = `${testFileNamePart}-${identifierPart}-${counter}`;
+    const checksum = md5.update(fileNameStart).digest("hex").substr(0, 5);
+    return `${fileNameStart}-${checksum}.snap.png`;
 }
 
 /**
@@ -50,9 +50,8 @@ export function getSnapshotPath(
     currentTestName: string,
     snapshotState: SnapshotState,
     snapshotsDir?: string,
-    identifier?: IdentifierGenerator,
 ) {
-    const fileName = getSnapshotFileName(testPath, currentTestName, snapshotState, identifier);
+    const fileName = getSnapshotFileName(testPath, currentTestName, snapshotState);
     return path.join(path.dirname(testPath), snapshotsDir || "__snapshots__", fileName);
 }
 
@@ -60,17 +59,14 @@ export function getReportPath(
     testPath: string,
     currentTestName: string,
     snapshotState: SnapshotState,
-    reportPath: ReportPathGenerator,
+    reportDir: string,
 ) {
     const counter = (snapshotState._counters.get(currentTestName) || 0) + 1;
-    if (reportPath === null) { return; }
-    if (typeof reportPath === "undefined") {
-        return path.join(
-            "jest-screenshot-reports",
-            path.basename(testPath),
-            kebabCase(currentTestName),
-            String(counter),
-        );
-    }
-    return reportPath(testPath, currentTestName, counter);
+    if (reportDir === null) { return; }
+    return path.join(
+        process.cwd(),
+        reportDir || "jest-screenshot-report",
+        "reports",
+        getSnapshotFileName(testPath, currentTestName, snapshotState),
+    );
 }

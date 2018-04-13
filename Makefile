@@ -10,6 +10,7 @@ docs: node_modules
 
 .PHONY: build
 build: node_modules
+	yarn webpack
 	yarn build
 
 .PHONY: test

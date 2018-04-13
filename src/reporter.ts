@@ -1,5 +1,5 @@
 import { config } from "./config";
-import { readFileSync, writeFileSync, readdirSync } from "fs";
+import { readFileSync, writeFileSync, readdirSync, mkdirSync } from "fs";
 import * as path from "path";
 import { getReportPath, getReportDir } from "./filenames";
 import { FailedSnapshotInfo, ReportMetadata, FileReport } from "./reporter-types";
@@ -7,13 +7,14 @@ import { FailedSnapshotInfo, ReportMetadata, FileReport } from "./reporter-types
 const template = (testResults: ReportMetadata) => `<html>
     <head>
         <title>Jest Screenshot Report</title>
+    </head>
+    <body>
+        <div id="root"></div>
         <script>
             window.testResults = '${JSON.stringify(testResults)}';
         </script>
         <script src="dist/bundle.js"></script>
         <link href="dist/bundle.css" type="styleshee" />
-    </head>
-    <body>
     </body>
 </html>`;
 
@@ -46,5 +47,18 @@ export = class JestScreenshotReporter { // tslint:disable-line
         writeFileSync(path.join(reportDir, "index.html"), template({
             files: fileReports,
         }));
+        try {
+            mkdirSync(path.join(reportDir, "dist"));
+        } catch (err) {
+            return;
+        }
+        writeFileSync(
+            path.join(reportDir, "dist", "bundle.js"),
+            readFileSync(path.join(__dirname, "report-viewer.js")),
+        );
+        // writeFileSync(
+        //     path.join(reportDir, "dist", "bundle.css"),
+        //     readFileSync(path.join(__dirname, "report-viewer.css")),
+        // );
     }
 };

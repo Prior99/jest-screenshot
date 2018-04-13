@@ -2,17 +2,19 @@ import { decode, readPngFileSync, writePngFileSync, PngImage } from "node-libpng
 import { diffImages, DiffImage } from "native-image-diff";
 import chalk from "chalk";
 import { existsSync, writeFileSync, readFileSync } from "fs";
-import { getSnapshotPath, getReportPath } from "./filenames";
+import { getSnapshotPath, getReportPath, getReportDir } from "./filenames";
 import { SnapshotState, isJestTestConfiguration, MatcherResult } from "./jest";
 import { sync as mkdirp } from "mkdirp";
 import * as path from "path";
 import { JestScreenshotConfiguration } from "./config";
 
-interface ImageMatcherResult extends MatcherResult {
+export interface ImageMatcherResult extends MatcherResult {
     diffImage?: DiffImage;
     changedRelative?: number;
     totalPixels?: number;
     changedPixels?: number;
+    testFileName?: string;
+    snapshotNumber?: number;
 }
 
 /**
@@ -163,6 +165,11 @@ export function toMatchImageSnapshot(
                 changedRelative,
                 totalPixels,
                 changedPixels,
+                testFileName: path.relative(process.cwd(), testPath),
+                snapshotNumber,
+                receivedPath: path.relative(getReportDir(reportDir), receivedPath),
+                diffPath: path.relative(getReportDir(reportDir), diffPath),
+                snapshotPath: path.relative(getReportDir(reportDir), snapshotPathReport),
             }));
         }
     }

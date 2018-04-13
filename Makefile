@@ -13,7 +13,7 @@ build: node_modules
 	yarn build
 
 .PHONY: test
-test: node_modules
+test: node_modules build
 	yarn test
 
 .PHONY: lint

@@ -4,6 +4,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const extractCSS = new ExtractTextPlugin('[name].css');
 
 module.exports = {
+    mode: "development",
     entry: {
         "report-viewer": path.resolve(__dirname, "src/report-viewer"),
     },
@@ -17,9 +18,9 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?/,
-                loader: "ts-loader",
+                loader: "awesome-typescript-loader",
                 options: {
-                    configFile: "tsconfig-webpack.json",
+                    configFileName: "tsconfig-webpack.json",
                 },
                 exclude: [
                     /__tests__/,

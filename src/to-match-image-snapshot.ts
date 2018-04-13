@@ -170,6 +170,8 @@ export function toMatchImageSnapshot(
                 receivedPath: path.relative(getReportDir(reportDir), receivedPath),
                 diffPath: path.relative(getReportDir(reportDir), diffPath),
                 snapshotPath: path.relative(getReportDir(reportDir), snapshotPathReport),
+                width: Math.max(snapshotImage.width, receivedImage.width),
+                height: Math.max(snapshotImage.height, receivedImage.height),
             }));
         }
     }

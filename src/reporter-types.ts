@@ -25,4 +25,6 @@ export interface FailedSnapshotInfo {
     receivedPath: string;
     diffPath: string;
     snapshotPath: string;
+    width: number;
+    height: number;
 }

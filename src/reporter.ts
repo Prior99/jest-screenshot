@@ -6,15 +6,16 @@ import { FailedSnapshotInfo, ReportMetadata, FileReport } from "./reporter-types
 
 const template = (testResults: ReportMetadata) => `<html>
     <head>
+        <meta charset="utf-8" />
         <title>Jest Screenshot Report</title>
-        <link href="dist/bundle.css" type="text/css" rel="stylesheet">
+        <link href="dist/report-viewer.css" type="text/css" rel="stylesheet" />
     </head>
     <body>
         <div id="root"></div>
         <script>
-            window.testResults = '${JSON.stringify(testResults)}';
+            window.testResults = ${JSON.stringify(testResults)};
         </script>
-        <script src="dist/bundle.js"></script>
+        <script src="dist/report-viewer.js"></script>
     </body>
 </html>`;
 
@@ -34,7 +35,11 @@ export = class JestScreenshotReporter { // tslint:disable-line
                 const matchingFailedSnapshots = failedSnapshots.filter(failedSnapshot => {
                     return failedSnapshot.testName === fullName && failedSnapshot.testFileName === testFilePath;
                 });
-                failed.push(...matchingFailedSnapshots);
+                if (matchingFailedSnapshots.length === 0) { return failed; }
+                failed.push({
+                    titles: [...test.ancestorTitles, test.title],
+                    failedSnapshots: matchingFailedSnapshots,
+                });
                 return failed;
             }, []);
             if (failedTests.length === 0) { return reports; }
@@ -52,13 +57,16 @@ export = class JestScreenshotReporter { // tslint:disable-line
         } catch (err) {
             // tslint: disable-line
         }
-        writeFileSync(
-            path.join(reportDir, "dist", "bundle.js"),
-            readFileSync(path.join(__dirname, "report-viewer.js")),
-        );
-        writeFileSync(
-            path.join(reportDir, "dist", "bundle.css"),
-            readFileSync(path.join(__dirname, "report-viewer.css")),
+        [
+            "report-viewer.js",
+            "report-viewer.js.map",
+            "report-viewer.css",
+            "report-viewer.css.map",
+        ].forEach(fileName =>
+            writeFileSync(
+                path.join(reportDir, "dist", fileName),
+                readFileSync(path.join(__dirname, fileName)),
+            ),
         );
     }
 };

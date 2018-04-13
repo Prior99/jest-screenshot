@@ -1,0 +1,24 @@
+.viewer-container {
+    position: relative;
+
+    @mixin viewer-image {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .viewer-received {
+        @include viewer-image;
+        z-index: 10;
+    }
+
+    .viewer-snapshot {
+        @include viewer-image;
+        z-index: 20;
+    }
+
+    .viewer-diff {
+        @include viewer-image;
+        z-index: 30;
+    }
+}

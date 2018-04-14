@@ -4,7 +4,7 @@ import Ansi = require("ansi-to-react"); // tslint:disable-line
 import * as classNames from "classnames/bind";
 import { FailedSnapshotInfo } from "../../../reporter-types";
 import { LevelItem } from "../level-item";
-import { ImageDiffViewer } from "../../image-diff-viewer";
+import { ImageDiffViewer } from "../image-diff-viewer";
 import * as css from "./snapshot.scss";
 
 const cx = classNames.bind({ ...bulma, ...css });

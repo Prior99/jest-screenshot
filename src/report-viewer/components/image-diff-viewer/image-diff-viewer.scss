@@ -1,0 +1,42 @@
+.viewer-container {
+    position: relative;
+    border: 1px solid grey;
+
+    @mixin viewer-image {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 100%;
+        overflow: hidden;
+
+        img {
+            max-width: none;
+        }
+    }
+
+    .viewer-received {
+        @include viewer-image;
+        z-index: 20;
+    }
+
+    .viewer-snapshot {
+        @include viewer-image;
+        z-index: 10;
+    }
+
+    .viewer-diff {
+        @include viewer-image;
+        z-index: 30;
+    }
+
+    .slider {
+        position: absolute;
+        border-left: 1px solid grey;
+        height: 100%;
+        top: 0;
+        bottom: 0;
+        z-index: 40;
+    }
+}

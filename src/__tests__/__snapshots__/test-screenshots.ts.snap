@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`screenshots npmjs 1`] = `
+"[31mReceived value[39m does not match [32mstored snapshot 1[39m.
+
+Expected less than [32m0.00%[39m of the pixels to have changed, but [31m0.18%[39m of the pixels changed."
+`;
+
+exports[`screenshots stackoverflow 1`] = `
+"[31mReceived value[39m does not match [32mstored snapshot 1[39m.
+
+Expected less than [32m0.00%[39m of the pixels to have changed, but [31m1.40%[39m of the pixels changed."
+`;

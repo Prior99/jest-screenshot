@@ -19,7 +19,7 @@ export interface ImageDiffViewerProps {
 @observer
 export class ImageDiffViewer extends React.Component<ImageDiffViewerProps> {
     @observable private dragging = false;
-    @observable private sliderX = 1;
+    @observable private sliderX = 0.5;
 
     private container: HTMLDivElement;
     private imageReceived: HTMLImageElement;
@@ -104,7 +104,10 @@ export class ImageDiffViewer extends React.Component<ImageDiffViewerProps> {
                     className={cx("viewer-container")}
                     ref={this.refContainer}
                 >
-                    <div className={cx("slider")} style={{ left: `${this.sliderX * 100}%` }} />
+                    <div className={cx("slider")} style={{ left: `${this.sliderX * 100}%` }}>
+                        <div className={cx("top")} />
+                        <div className={cx("bottom")} />
+                    </div>
                     <div className={cx("viewer-diff")}>
                         <img ref={this.refImageDiff} src={diff} />
                     </div>

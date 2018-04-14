@@ -1,6 +1,7 @@
 .viewer-container {
     position: relative;
     border: 1px solid grey;
+    overflow: hidden;
 
     @mixin viewer-image {
         position: absolute;
@@ -38,5 +39,25 @@
         top: 0;
         bottom: 0;
         z-index: 40;
+
+        @mixin triangle {
+            left: -6px;
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+        }
+
+        .top {
+            @include triangle;
+            border-top: 5px solid grey;
+        }
+
+        .bottom {
+            @include triangle;
+            border-bottom: 5px solid grey;
+            bottom: 0;
+        }
     }
 }

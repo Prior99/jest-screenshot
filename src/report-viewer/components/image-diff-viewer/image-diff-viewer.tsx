@@ -20,6 +20,7 @@ export interface ImageDiffViewerProps {
 export class ImageDiffViewer extends React.Component<ImageDiffViewerProps> {
     @observable private dragging = false;
     @observable private sliderX = 0.5;
+    @observable private diffOpacity = 0.5;
 
     private container: HTMLDivElement;
     private imageReceived: HTMLImageElement;
@@ -92,10 +93,31 @@ export class ImageDiffViewer extends React.Component<ImageDiffViewerProps> {
         });
     }
 
+    @action.bound private handleDiffOpacity(event: React.SyntheticEvent<HTMLInputElement>) {
+        this.diffOpacity = Number(event.currentTarget.value);
+    }
+
     public render() {
         const { received, snapshot, diff } = this.props;
         return (
             <article>
+                <nav className={cx("level", "settings")}>
+                    <div className={cx("level-item", "has-text-centered")}>
+                        <div>
+                            <p className={cx("heading")}>Diff Opacity</p>
+                            <p className={cx("title")}>
+                                <input
+                                    type="range"
+                                    min={0}
+                                    max={1}
+                                    step="any"
+                                    value={this.diffOpacity}
+                                    onChange={this.handleDiffOpacity}
+                                />
+                            </p>
+                        </div>
+                    </div>
+                </nav>
                 <div
                     onMouseDown={this.handleDragStart}
                     onMouseLeave={this.handleDragStop}
@@ -109,11 +131,11 @@ export class ImageDiffViewer extends React.Component<ImageDiffViewerProps> {
                         <div className={cx("bottom")} />
                     </div>
                     <div className={cx("viewer-diff")}>
-                        <img ref={this.refImageDiff} src={diff} />
+                        <img ref={this.refImageDiff} src={diff} style={{ opacity: this.diffOpacity }} />
                     </div>
                     <div
                         className={cx("viewer-received")}
-                        style={{ width: `${this.sliderX * 100}%`,}}
+                        style={{ width: `${this.sliderX * 100}%` }}
                     >
                         <img ref={this.refImageReceived} src={received} />
                     </div>

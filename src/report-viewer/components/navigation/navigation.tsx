@@ -1,11 +1,22 @@
 import * as React from "react";
 import * as bulma from "bulma";
+import { observer } from "mobx-react";
+import { external, inject } from "tsdi";
+import { action } from "mobx";
+import { StoreUi } from "../../store";
 import * as css from "./navigation.scss";
 import * as classNames from "classnames/bind";
 
 const cx = classNames.bind({ ...bulma, ...css });
 
+@external @observer
 export class Navigation extends React.Component {
+    @inject private ui: StoreUi;
+
+    @action.bound private handleHamburgerClick() {
+        this.ui.toggleMenu();
+    }
+
     public render() {
         return (
             <nav className={cx("navbar", "is-dark")}>

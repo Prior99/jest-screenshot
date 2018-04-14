@@ -1,6 +1,7 @@
 import { config } from "./config";
-import { readFileSync, writeFileSync, readdirSync, mkdirSync } from "fs";
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync, unlinkSync } from "fs";
 import * as path from "path";
+import { sync as rimrafSync } from "rimraf";
 import { getReportPath, getReportDir } from "./filenames";
 import { FailedSnapshotInfo, ReportMetadata, FileReport } from "./reporter-types";
 
@@ -19,15 +20,26 @@ const template = (testResults: ReportMetadata) => `<html>
     </body>
 </html>`;
 
+const { reportDir: reportDirName } = config();
+const reportDir = getReportDir(reportDirName);
+const reportsDir = path.join(reportDir, "reports");
+
 export = class JestScreenshotReporter { // tslint:disable-line
-    public onRunComplete(contexts: Set<jest.Context>, { testResults }: jest.AggregatedResult) {
-        const { reportDir: reportDirName } = config();
-        const reportDir = getReportDir(reportDirName);
-        const failedSnapshots = readdirSync(path.join(reportDir, "reports")).map(testPath => {
+    constructor() {
+        if (existsSync(reportDir)) {
+            rimrafSync(reportDir);
+        }
+    }
+
+    public onRunComplete(contexts: Set<jest.Context>, { testResults, numFailedTests }: jest.AggregatedResult) {
+        if (numFailedTests === 0) { return; }
+        if (!existsSync(reportsDir)) { return; }
+        const failedSnapshots = readdirSync(reportsDir).map(testPath => {
             const infoFilePath = path.join(reportDir, "reports", testPath, "info.json");
             const info: FailedSnapshotInfo = JSON.parse(readFileSync(infoFilePath, "utf8"));
             return info;
         });
+        if (failedSnapshots.length === 0) { return; }
         const fileReports: FileReport[] = testResults.reduce((reports, testFile) => {
             const testFilePath = path.relative(process.cwd(), testFile.testFilePath);
             const failedTests = testFile.testResults.reduce((failed, test) => {

@@ -23,6 +23,13 @@ export class Navigation extends React.Component {
                 <div className={cx("navbar-brand", "brand")}>
                     Jest Screenshot Report
                 </div>
+                <div className={cx("navbar-menu", "is-active")}>
+                    <div className={cx("navbar-end")}>
+                        <a className={cx("navbar-item")} onClick={this.handleHamburgerClick}>
+                            {this.ui.menuVisible ? "Hide Sidebar" : "Show Sidebar"}
+                        </a>
+                    </div>
+                </div>
             </nav>
         );
     }

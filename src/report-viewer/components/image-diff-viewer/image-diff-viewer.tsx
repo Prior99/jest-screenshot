@@ -1,10 +1,12 @@
 import * as React from "react";
 import * as bulma from "bulma";
 import { observer } from "mobx-react";
-import { observable, action, computed } from "mobx";
+import { external, inject, initialize } from "tsdi";
+import { observable, action, computed, reaction } from "mobx";
 import * as classNames from "classnames/bind";
-import * as css from "./image-diff-viewer.scss";
 import { bind } from "lodash-decorators";
+import { StoreUi } from "../../store";
+import * as css from "./image-diff-viewer.scss";
 
 const cx = classNames.bind({ ...bulma, ...css });
 
@@ -16,8 +18,10 @@ export interface ImageDiffViewerProps {
     height: number;
 }
 
-@observer
+@external @observer
 export class ImageDiffViewer extends React.Component<ImageDiffViewerProps> {
+    @inject private ui: StoreUi;
+
     @observable private dragging = false;
     @observable private sliderX = 0.5;
     @observable private diffOpacity = 0.5;
@@ -27,11 +31,15 @@ export class ImageDiffViewer extends React.Component<ImageDiffViewerProps> {
     private imageSnapshot: HTMLImageElement;
     private imageDiff: HTMLImageElement;
 
-    constructor(props: ImageDiffViewerProps) {
-        super(props);
-        window.addEventListener("resize", () => {
+    @initialize
+    private initialize() {
+        const rerender = () => {
             this.forceUpdate();
             this.adjustSizes();
+        };
+        window.addEventListener("resize", rerender);
+        reaction(() => this.ui.menuVisible, () => {
+            setTimeout(() => rerender(), 0);
         });
     }
 

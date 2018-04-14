@@ -14,14 +14,14 @@ export class Sidebar extends React.Component {
     @inject private ui: StoreUi;
 
     public render() {
-        const classes = cx({
-            "column": true,
-            "is-3": this.ui.menuVisible,
-            "section": true,
-            "is-fullheight": true,
-            "menu": true,
-            "sidebar": true,
-        });
+        if (!this.ui.menuVisible) { return null; }
+        const classes = cx(
+            "column",
+            "is-3",
+            "section",
+            "is-fullheight",
+            "menu",
+        );
         return (
             <aside className={classes}>
                 <p className={cx("menu-label")} />

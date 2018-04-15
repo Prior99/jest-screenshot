@@ -7,6 +7,7 @@ import { bind } from "lodash-decorators";
 import * as css from "./image-diff-viewer.scss";
 import { DiffSlider } from "./diff-slider";
 import { DiffBlend } from "./diff-blend";
+import { DiffSideBySide } from "./diff-side-by-side";
 
 const cx = classNames.bind({ ...bulma, ...css });
 
@@ -64,7 +65,15 @@ export class ImageDiffViewer extends React.Component<ImageDiffViewerProps> {
                     />
                 );
             case Tab.SideBySide:
-                return null;
+                return (
+                    <DiffSideBySide
+                        received={received}
+                        snapshot={snapshot}
+                        diff={diff}
+                        width={width}
+                        height={height}
+                    />
+                );
             default:
                 return null;
         }
@@ -73,7 +82,7 @@ export class ImageDiffViewer extends React.Component<ImageDiffViewerProps> {
     public render() {
         return (
             <article>
-                <div className={cx("tabs", "is-toggle", "is-center")}>
+                <div className={cx("tabs", "is-toggle", "is-center", "is-fullwidth")}>
                     <ul>
                         <li className={cx({ "is-active": this.sliderTabActive })}>
                             <a onClick={this.handleSliderTabClick}>Slider</a>

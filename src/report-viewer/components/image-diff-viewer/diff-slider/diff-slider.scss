@@ -1,0 +1,61 @@
+.viewer-container {
+    position: relative;
+    border: 1px solid grey;
+    overflow: hidden;
+
+    @mixin viewer-image {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        overflow: hidden;
+
+        img {
+            max-width: none;
+        }
+    }
+
+    .viewer-received {
+        @include viewer-image;
+        z-index: 20;
+    }
+
+    .viewer-snapshot {
+        @include viewer-image;
+        z-index: 10;
+    }
+
+    .viewer-diff {
+        @include viewer-image;
+        z-index: 30;
+    }
+
+    .slider {
+        position: absolute;
+        border-left: 1px solid grey;
+        height: 100%;
+        top: 0;
+        bottom: 0;
+        z-index: 40;
+
+        @mixin triangle {
+            left: -6px;
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+        }
+
+        .top {
+            @include triangle;
+            border-top: 5px solid grey;
+        }
+
+        .bottom {
+            @include triangle;
+            border-bottom: 5px solid grey;
+            bottom: 0;
+        }
+    }
+}

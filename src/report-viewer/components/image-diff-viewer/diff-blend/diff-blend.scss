@@ -1,0 +1,29 @@
+.viewer-container {
+    position: relative;
+    border: 1px solid grey;
+    height: fit-content;
+
+    @mixin viewer-image {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: fit-content;
+    }
+
+    .viewer-received {
+        @include viewer-image;
+        z-index: 20;
+    }
+
+    .viewer-snapshot {
+        @include viewer-image;
+        position: unset;
+        z-index: 10;
+    }
+
+    .viewer-diff {
+        @include viewer-image;
+        z-index: 30;
+    }
+}

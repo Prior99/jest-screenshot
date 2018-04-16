@@ -10,7 +10,7 @@
     "test": "jest",
     "lint": "tslint --format stylish --type-check --project tsconfig.json",
     "clean": "rm -rf dist",
-    "docs": "typedoc --mode file --out docs/ --exclude '**/test-*.ts' src/"
+    "docs": "typedoc --mode file --out docs/ --exclude '**/test-*.ts,**/report-viewer/**/*' src/"
   },
   "repository": {
     "type": "git",

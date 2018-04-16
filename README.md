@@ -14,20 +14,94 @@ Please also refer to the **[Documentation](https://prior99.github.io/jest-screen
 
  * [jest-screenshot](#jest-screenshot)
     * [Table of contents](#table-of-contents)
-    * [Usage](#usage)
+    * [Installation](#installation)
+        * [Installing the expect extension](#installing-the-expect-extension)
+        * [Installing the reporter](#installing-the-reporter)
         * [Configuring](#configuring)
+            * [Example](#example)
+    * [Usage](#usage)
+    * [Reports](#reports)
     * [Contributing](#contributing)
     * [Contributors](#contributors)
 
-## Usage
+## Installation
 
-Integrate this plugin by calling `setupJestScreenshot`:
+Two steps are necessary in order to use this plugin:
+
+ 1. Install the `expect().toMatchImageSnapshot()` extension. ([Here](#installing-the-expect-extension))
+ 2. Install the reporter. ([Here](#installing-the-reporter))
+
+### Installing the expect extension
+
+Integrate this plugin by calling `setupJestScreenshot` in the framework setup file:
 
 ```typescript
 import { setupJestScreenshot } from "jest-screenshot";
 
 setupJestScreenshot();
 ```
+
+Store the above code in a `setup-framework.js` file and specify it when configuring Jest:
+
+```json
+"jest": {
+    ...
+    "setupTestFrameworkScriptFile": "<rootDir>/setup-framework.js"
+    ...
+}
+```
+
+### Installing the reporter
+
+In order to generate the report, the reporter must be registered in the Jest configuration:
+
+```json
+"jest": {
+    ...
+    "reporters": [
+        "default",
+        "jest-screenshot/reporter"
+    ],
+    ...
+}
+```
+
+### Configuring
+
+By placing a file **jest-screenshot.json** in the root directory of your project with a [configuration object](https://prior99.github.io/jest-screenshot/docs/interfaces/jestscreenshotconfiguration.html)
+you can configure it:
+
+| Parameter                | type     | default                  | Description
+|--------------------------|----------|--------------------------|-----------------------------------------|
+| `detectAntialiasing`     | boolean  | `true`                   | Whether to attempt to detect antialiasing and ignore related changes when comparing both images. [See documentation](https://prior99.github.io/native-image-diff/docs/interfaces/diffimagesarguments.html#detectantialiasing). |
+| `colorThreshold`         | number   | `0.1`                    | A number in the range from `0` to `1` describing how sensitive the comparison of two pixels should be. [See documentation](https://prior99.github.io/native-image-diff/docs/interfaces/diffimagesarguments.html#colorthreshold). |
+| `pixelThresholdAbsolute` | number   | `undefined`              | If specified, **jest-screenshot** will fail if more than the specified pixels are different from the snapshot. |
+| `pixelThresholdRelative` | number   | `0`                      | If specified, **jest-screenshot** will fail if more than the specified relative amount of pixels are different from the snapshot. When setting this to `0.5` for example, more than 50% of the pixels need to be different for the test to fail. |
+| `snapshotsDir`           | string   | `__snapshots__`          | If specified, will change the directory into which the snapshot images will be stored, relative to the unit test file. |
+| `reportDir`              | string   | `jest-screenshot-report` | If specified, will change the directory into which the HTML report will be written, relative to the project's root directory.  |
+
+It's also possible to specify a key `jestScreenshot` in the **package.json** with the same interface.
+
+All configuration options are optional.
+
+If neither `pixelThresholdAbsolute` nor `pixelThresholdRelative` are specified, `pixelThresholdRelative` will be set to `0`.
+Both can be specified together in order to make the test fail on both conditions.
+
+#### Example
+
+```json
+{
+    "detectAntialiasing": false,
+    "colorThreshold": 0,
+    "pixelThresholdAbsolute": 150,
+    "pixelThresholdRelative": 0.5
+};
+```
+
+The above config will make the tests fail if more than 150 pixels in total changed or more than 50% of the pixels changed.
+It will detect any pixel as changed even if the color only differs minimally and antialiasing detection is disabled.
+
+## Usage
 
 Take a look at [the example project](example/).
 
@@ -55,34 +129,21 @@ describe("My fancy webpage", () => {
 });
 ```
 
-### Configuring
+## Reports
 
-`jestScreenshot()` takes [an optional first argument](https://prior99.github.io/jest-screenshot/docs/interfaces/tomatchimagesnapshotconfiguration.html) with an object to configure it:
+An HTML report with interactive tools for comparing the failed snapshots will be generated if any tests failed.
 
-| Parameter                | type     | default         | Optional | Description
-|--------------------------|----------|-----------------|----------|-----------------------------------------|
-| `detectAntialiasing`     | boolean  | `true`          | ✓        | Whether to attempt to detect antialiasing and ignore related changes when comparing both images. [See documentation](https://prior99.github.io/native-image-diff/docs/interfaces/diffimagesarguments.html#detectantialiasing). |
-| `colorThreshold`         | number   | `0.1`           | ✓        | A number in the range from `0` to `1` describing how sensitive the comparison of two pixels should be. [See documentation](https://prior99.github.io/native-image-diff/docs/interfaces/diffimagesarguments.html#colorthreshold). |
-| `pixelThresholdAbsolute` | number   | `undefined`     | ✓        | If specified, **jest-screenshot** will fail if more than the specified pixels are different from the snapshot. |
-| `pixelThresholdRelative` | number   | `0`             | ✓        | If specified, **jest-screenshot** will fail if more than the specified relative amount of pixels are different from the snapshot. When setting this to `0.5` for example, more than 50% of the pixels need to be different for the test to fail. |
-| `identifier`             | function |                 | ✓        | A function with the following signature: `(testPath: string, testName: string, counter: number) => string` which generates the filename for the snapshot. The filename needs to be unique. A sane default generator is implemented. |
-| `snapshotsDir`           | string   | `__snapshots__` | ✓        | If specified, will change the directory into which the snapshot images will be stored. Together with `identifier` this defines the absolute path to the file. |
+**[A demo can be found here](https://prior99.github.io/jest-screenshot/report-demo)**
 
-#### Example
+They might look for example like this:
 
-```typescript
-import { jestScreenshot } from "jest-screenshot";
+![Example Side-by-side](images/screenshot-report-side-by-side.png)
 
-setupJestScreenshot({
-    detectAntialiasing: false,
-    colorThreshold: 0,
-    pixelThresholdAbsolute: 150, // Fail if more than 150 pixels in total changed.
-    pixelThresholdRelative: 0.5 // Fail if more than 50% of the pixels changed.
-});
-```
+![Example Slider](images/screenshot-report-slider.png)
 
-If neither `pixelThresholdAbsolute` nor `pixelThresholdRelative` are specified, `pixelThresholdRelative` will be set to `0`.
-Both can be specified together in order to make the test fail on both conditions.
+![Example Blend](images/screenshot-report-blend.png)
+
+The report will be placed in a `jest-screenshot-report` directory in the project's root directory by default.
 
 ## Contributing
 

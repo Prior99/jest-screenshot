@@ -7,6 +7,7 @@ node_modules:
 .PHONY: docs
 docs: node_modules
 	yarn docs
+	cp -r images docs/
 
 .PHONY: build
 build: node_modules

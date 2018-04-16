@@ -133,7 +133,7 @@ describe("My fancy webpage", () => {
 
 An HTML report with interactive tools for comparing the failed snapshots will be generated if any tests failed.
 
-**[A demo can be found here](https://prior99.github.io/jest-screenshot/report-demo)**
+**[A demo can be found here](https://prior99.github.io/jest-screenshot/report-demo).**
 
 They might look for example like this:
 

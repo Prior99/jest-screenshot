@@ -45,9 +45,9 @@ Store the above code in a `setup-framework.js` file and specify it when configur
 
 ```json
 "jest": {
-    ...
+
     "setupTestFrameworkScriptFile": "<rootDir>/setup-framework.js"
-    ...
+
 }
 ```
 
@@ -57,12 +57,12 @@ In order to generate the report, the reporter must be registered in the Jest con
 
 ```json
 "jest": {
-    ...
+
     "reporters": [
         "default",
         "jest-screenshot/reporter"
-    ],
-    ...
+    ]
+
 }
 ```
 

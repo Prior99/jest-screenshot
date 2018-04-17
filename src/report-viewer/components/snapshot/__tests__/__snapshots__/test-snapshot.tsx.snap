@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot looks as expected 1`] = `
+<article>
+  <nav
+    className="level"
+  >
+    <LevelItem
+      name="Total Pixels"
+      value="10"
+    />
+    <LevelItem
+      name="Changed Pixels"
+      value="5"
+    />
+    <LevelItem
+      name="Difference"
+      value="50.00%"
+    />
+  </nav>
+  <div
+    className="message test-message"
+  >
+    <div
+      className="message-body"
+    >
+      <Ansi>
+        Received message.
+      </Ansi>
+    </div>
+  </div>
+  <ImageDiffViewer
+    diff="jest-screenshot-report/reports/some-identifier.snap.png/diff.png"
+    height={2}
+    received="jest-screenshot-report/reports/some-identifier.snap.png/received.png"
+    snapshot="jest-screenshot-report/reports/some-identifier.snap.png/snapshot.png"
+    width={5}
+  />
+</article>
+`;

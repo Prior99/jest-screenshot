@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation looks as expected 1`] = `
+<nav
+  className="navbar is-dark"
+>
+  <div
+    className="navbar-brand brand"
+  >
+    Jest Screenshot Report
+  </div>
+  <div
+    className="navbar-menu is-active"
+  >
+    <div
+      className="navbar-end"
+    >
+      <a
+        className="navbar-item"
+        onClick={[Function]}
+      >
+        Hide Sidebar
+      </a>
+    </div>
+  </div>
+</nav>
+`;

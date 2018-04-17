@@ -58,7 +58,7 @@ export class DiffSlider extends React.Component<DiffSliderProps> {
     }
 
     @bind private slide(event: React.MouseEvent<HTMLDivElement>) {
-        const { left, width } = event.currentTarget.getBoundingClientRect();
+        const { left, width } = this.container.getBoundingClientRect();
         this.sliderX = (event.clientX - left) / width;
         event.stopPropagation();
         event.preventDefault();
@@ -93,9 +93,9 @@ export class DiffSlider extends React.Component<DiffSliderProps> {
         this.container.style.height = `${containerHeight}px`;
         [this.imageDiff, this.imageReceived, this.imageSnapshot].forEach(image => {
             image.width = containerWidth;
-            image.height = containerHeight - 2;
+            image.height = containerHeight;
             image.style.width = `${containerWidth}px`;
-            image.style.height = `${containerHeight - 2}px`;
+            image.style.height = `${containerHeight}px`;
         });
     }
 

@@ -1,0 +1,600 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DiffSlider looks as expected 1`] = `
+<React.Fragment>
+  <nav
+    className="level settings"
+  >
+    <div
+      className="level-item has-text-centered"
+    >
+      <div>
+        <div
+          className="heading"
+        >
+          Diff Opacity
+        </div>
+        <input
+          className="title"
+          max={1}
+          min={0}
+          onChange={[Function]}
+          step="any"
+          type="range"
+          value={0.5}
+        />
+      </div>
+    </div>
+  </nav>
+  <div
+    className="viewer-container"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
+  >
+    <div
+      className="slider"
+      style={
+        Object {
+          "left": "50%",
+        }
+      }
+    >
+      <div
+        className="top"
+      />
+      <div
+        className="bottom"
+      />
+    </div>
+    <div
+      className="viewer-diff"
+    >
+      <img
+        src="reports/something/diff.png"
+        style={
+          Object {
+            "opacity": 0.5,
+          }
+        }
+      />
+    </div>
+    <div
+      className="viewer-received"
+      style={
+        Object {
+          "width": "50%",
+        }
+      }
+    >
+      <img
+        src="reports/something/received.png"
+      />
+    </div>
+    <div
+      className="viewer-snapshot"
+    >
+      <img
+        src="reports/something/snapshot.png"
+      />
+    </div>
+  </div>
+</React.Fragment>
+`;
+
+exports[`DiffSlider moves the slider when dragging on the image 1`] = `
+<DiffSlider
+  diff="reports/something/diff.png"
+  height={100}
+  received="reports/something/received.png"
+  snapshot="reports/something/snapshot.png"
+  width={100}
+>
+  <nav
+    className="level settings"
+  >
+    <div
+      className="level-item has-text-centered"
+    >
+      <div>
+        <div
+          className="heading"
+        >
+          Diff Opacity
+        </div>
+        <input
+          className="title"
+          max={1}
+          min={0}
+          onChange={[Function]}
+          step="any"
+          type="range"
+          value={0.5}
+        />
+      </div>
+    </div>
+  </nav>
+  <div
+    className="viewer-container"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
+  >
+    <div
+      className="slider"
+      style={
+        Object {
+          "left": "50%",
+        }
+      }
+    >
+      <div
+        className="top"
+      />
+      <div
+        className="bottom"
+      />
+    </div>
+    <div
+      className="viewer-diff"
+    >
+      <img
+        src="reports/something/diff.png"
+        style={
+          Object {
+            "opacity": 0.5,
+          }
+        }
+      />
+    </div>
+    <div
+      className="viewer-received"
+      style={
+        Object {
+          "width": "50%",
+        }
+      }
+    >
+      <img
+        src="reports/something/received.png"
+      />
+    </div>
+    <div
+      className="viewer-snapshot"
+    >
+      <img
+        src="reports/something/snapshot.png"
+      />
+    </div>
+  </div>
+</DiffSlider>
+`;
+
+exports[`DiffSlider moves the slider when dragging on the image 2`] = `
+<DiffSlider
+  diff="reports/something/diff.png"
+  height={100}
+  received="reports/something/received.png"
+  snapshot="reports/something/snapshot.png"
+  width={100}
+>
+  <nav
+    className="level settings"
+  >
+    <div
+      className="level-item has-text-centered"
+    >
+      <div>
+        <div
+          className="heading"
+        >
+          Diff Opacity
+        </div>
+        <input
+          className="title"
+          max={1}
+          min={0}
+          onChange={[Function]}
+          step="any"
+          type="range"
+          value={0.5}
+        />
+      </div>
+    </div>
+  </nav>
+  <div
+    className="viewer-container"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
+  >
+    <div
+      className="slider"
+      style={
+        Object {
+          "left": "75%",
+        }
+      }
+    >
+      <div
+        className="top"
+      />
+      <div
+        className="bottom"
+      />
+    </div>
+    <div
+      className="viewer-diff"
+    >
+      <img
+        src="reports/something/diff.png"
+        style={
+          Object {
+            "opacity": 0.5,
+          }
+        }
+      />
+    </div>
+    <div
+      className="viewer-received"
+      style={
+        Object {
+          "width": "75%",
+        }
+      }
+    >
+      <img
+        src="reports/something/received.png"
+      />
+    </div>
+    <div
+      className="viewer-snapshot"
+    >
+      <img
+        src="reports/something/snapshot.png"
+      />
+    </div>
+  </div>
+</DiffSlider>
+`;
+
+exports[`DiffSlider moves the slider when dragging on the image 3`] = `
+<DiffSlider
+  diff="reports/something/diff.png"
+  height={100}
+  received="reports/something/received.png"
+  snapshot="reports/something/snapshot.png"
+  width={100}
+>
+  <nav
+    className="level settings"
+  >
+    <div
+      className="level-item has-text-centered"
+    >
+      <div>
+        <div
+          className="heading"
+        >
+          Diff Opacity
+        </div>
+        <input
+          className="title"
+          max={1}
+          min={0}
+          onChange={[Function]}
+          step="any"
+          type="range"
+          value={0.5}
+        />
+      </div>
+    </div>
+  </nav>
+  <div
+    className="viewer-container"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
+  >
+    <div
+      className="slider"
+      style={
+        Object {
+          "left": "75%",
+        }
+      }
+    >
+      <div
+        className="top"
+      />
+      <div
+        className="bottom"
+      />
+    </div>
+    <div
+      className="viewer-diff"
+    >
+      <img
+        src="reports/something/diff.png"
+        style={
+          Object {
+            "opacity": 0.5,
+          }
+        }
+      />
+    </div>
+    <div
+      className="viewer-received"
+      style={
+        Object {
+          "width": "75%",
+        }
+      }
+    >
+      <img
+        src="reports/something/received.png"
+      />
+    </div>
+    <div
+      className="viewer-snapshot"
+    >
+      <img
+        src="reports/something/snapshot.png"
+      />
+    </div>
+  </div>
+</DiffSlider>
+`;
+
+exports[`DiffSlider when setting the diff opacity to 0 1`] = `
+<React.Fragment>
+  <nav
+    className="level settings"
+  >
+    <div
+      className="level-item has-text-centered"
+    >
+      <div>
+        <div
+          className="heading"
+        >
+          Diff Opacity
+        </div>
+        <input
+          className="title"
+          max={1}
+          min={0}
+          onChange={[Function]}
+          step="any"
+          type="range"
+          value={0}
+        />
+      </div>
+    </div>
+  </nav>
+  <div
+    className="viewer-container"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
+  >
+    <div
+      className="slider"
+      style={
+        Object {
+          "left": "50%",
+        }
+      }
+    >
+      <div
+        className="top"
+      />
+      <div
+        className="bottom"
+      />
+    </div>
+    <div
+      className="viewer-diff"
+    >
+      <img
+        src="reports/something/diff.png"
+        style={
+          Object {
+            "opacity": 0,
+          }
+        }
+      />
+    </div>
+    <div
+      className="viewer-received"
+      style={
+        Object {
+          "width": "50%",
+        }
+      }
+    >
+      <img
+        src="reports/something/received.png"
+      />
+    </div>
+    <div
+      className="viewer-snapshot"
+    >
+      <img
+        src="reports/something/snapshot.png"
+      />
+    </div>
+  </div>
+</React.Fragment>
+`;
+
+exports[`DiffSlider when setting the diff opacity to 0.7 1`] = `
+<React.Fragment>
+  <nav
+    className="level settings"
+  >
+    <div
+      className="level-item has-text-centered"
+    >
+      <div>
+        <div
+          className="heading"
+        >
+          Diff Opacity
+        </div>
+        <input
+          className="title"
+          max={1}
+          min={0}
+          onChange={[Function]}
+          step="any"
+          type="range"
+          value={0.7}
+        />
+      </div>
+    </div>
+  </nav>
+  <div
+    className="viewer-container"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
+  >
+    <div
+      className="slider"
+      style={
+        Object {
+          "left": "50%",
+        }
+      }
+    >
+      <div
+        className="top"
+      />
+      <div
+        className="bottom"
+      />
+    </div>
+    <div
+      className="viewer-diff"
+    >
+      <img
+        src="reports/something/diff.png"
+        style={
+          Object {
+            "opacity": 0.7,
+          }
+        }
+      />
+    </div>
+    <div
+      className="viewer-received"
+      style={
+        Object {
+          "width": "50%",
+        }
+      }
+    >
+      <img
+        src="reports/something/received.png"
+      />
+    </div>
+    <div
+      className="viewer-snapshot"
+    >
+      <img
+        src="reports/something/snapshot.png"
+      />
+    </div>
+  </div>
+</React.Fragment>
+`;
+
+exports[`DiffSlider when setting the diff opacity to 1 1`] = `
+<React.Fragment>
+  <nav
+    className="level settings"
+  >
+    <div
+      className="level-item has-text-centered"
+    >
+      <div>
+        <div
+          className="heading"
+        >
+          Diff Opacity
+        </div>
+        <input
+          className="title"
+          max={1}
+          min={0}
+          onChange={[Function]}
+          step="any"
+          type="range"
+          value={1}
+        />
+      </div>
+    </div>
+  </nav>
+  <div
+    className="viewer-container"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
+  >
+    <div
+      className="slider"
+      style={
+        Object {
+          "left": "50%",
+        }
+      }
+    >
+      <div
+        className="top"
+      />
+      <div
+        className="bottom"
+      />
+    </div>
+    <div
+      className="viewer-diff"
+    >
+      <img
+        src="reports/something/diff.png"
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      />
+    </div>
+    <div
+      className="viewer-received"
+      style={
+        Object {
+          "width": "50%",
+        }
+      }
+    >
+      <img
+        src="reports/something/received.png"
+      />
+    </div>
+    <div
+      className="viewer-snapshot"
+    >
+      <img
+        src="reports/something/snapshot.png"
+      />
+    </div>
+  </div>
+</React.Fragment>
+`;

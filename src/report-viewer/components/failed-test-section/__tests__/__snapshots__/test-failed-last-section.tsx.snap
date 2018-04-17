@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FailedTestSection looks as expected 1`] = `
+<section
+  className="section"
+>
+  <p
+    className="subtitle is-4"
+  >
+    The thing with this other thing does things
+  </p>
+  <Snapshot
+    key="The first snapshots-1"
+    snapshot={
+      Object {
+        "changedPixels": 5,
+        "changedRelative": 0.5,
+        "diffPath": "jest-screenshot-report/reports/some-identifier.snap.png/diff.png",
+        "height": 2,
+        "message": "Received message.",
+        "receivedPath": "jest-screenshot-report/reports/some-identifier.snap.png/received.png",
+        "snapshotNumber": 1,
+        "snapshotPath": "jest-screenshot-report/reports/some-identifier.snap.png/snapshot.png",
+        "testFileName": "src/__tests__/test-first.ts",
+        "testName": "The first snapshots",
+        "totalPixels": 10,
+        "width": 5,
+      }
+    }
+  />
+  <Snapshot
+    key="The first snapshots-2"
+    snapshot={
+      Object {
+        "changedPixels": 20,
+        "changedRelative": 0.2,
+        "diffPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/diff.png",
+        "height": 10,
+        "message": "Received message.",
+        "receivedPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/received.png",
+        "snapshotNumber": 2,
+        "snapshotPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/snapshot.png",
+        "testFileName": "src/__tests__/test-first.ts",
+        "testName": "The first snapshots",
+        "totalPixels": 100,
+        "width": 10,
+      }
+    }
+  />
+</section>
+`;

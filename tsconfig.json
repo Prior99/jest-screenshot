@@ -9,10 +9,11 @@
         "outDir": "dist",
         "lib": ["es2016", "dom"],
         "moduleResolution": "node",
-        "jsx": "react"
+        "jsx": "react",
+        "emitDecoratorMetadata": true
     },
     "exclude": [
-        "node_modules.",
+        "node_modules",
         "dist/",
         "example/",
         "index.d.ts"

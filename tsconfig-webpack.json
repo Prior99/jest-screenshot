@@ -10,8 +10,7 @@
         "lib": ["es2016", "dom"],
         "moduleResolution": "node",
         "jsx": "react",
-        "emitDecoratorMetadata": true,
-        "sourceMaps": true
+        "emitDecoratorMetadata": true
     },
     "exclude": [
         "**/__tests__/*",

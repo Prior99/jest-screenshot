@@ -32,7 +32,7 @@ export = class JestScreenshotReporter { // tslint:disable-line
     }
 
     public onRunComplete(contexts: Set<jest.Context>, { testResults, numFailedTests }: jest.AggregatedResult) {
-        if (numFailedTests === 0) { return; }
+        // if (numFailedTests === 0) { return; }
         if (!existsSync(reportsDir)) { return; }
         const failedSnapshots = readdirSync(reportsDir).map(testPath => {
             const infoFilePath = path.join(reportDir, "reports", testPath, "info.json");

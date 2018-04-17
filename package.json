@@ -44,7 +44,7 @@
       "^.+\\.(ts|tsx)$": "ts-jest"
     },
     "testMatch": [
-      "**/__tests__/*.(ts|js|tsx)"
+      "**/__tests__/test-*.(ts|js|tsx)"
     ],
     "testPathIgnorePatterns": [
       "/example/"

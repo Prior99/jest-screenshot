@@ -74,8 +74,6 @@ export class ImageDiffViewer extends React.Component<ImageDiffViewerProps> {
                         height={height}
                     />
                 );
-            default:
-                return null;
         }
     }
 

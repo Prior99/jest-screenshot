@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main looks as expected 1`] = `
+<main
+  className="column is-9 section is-fullheight"
+>
+  <h1
+    className="title"
+  >
+    src/__tests__/test-first.ts
+  </h1>
+  <FailedTestSection
+    failedTest={
+      Object {
+        "failedSnapshots": Array [
+          Object {
+            "changedPixels": 5,
+            "changedRelative": 0.5,
+            "diffPath": "jest-screenshot-report/reports/some-identifier.snap.png/diff.png",
+            "height": 2,
+            "message": "Received message.",
+            "receivedPath": "jest-screenshot-report/reports/some-identifier.snap.png/received.png",
+            "snapshotNumber": 1,
+            "snapshotPath": "jest-screenshot-report/reports/some-identifier.snap.png/snapshot.png",
+            "testFileName": "src/__tests__/test-first.ts",
+            "testName": "The first snapshots",
+            "totalPixels": 10,
+            "width": 5,
+          },
+          Object {
+            "changedPixels": 20,
+            "changedRelative": 0.2,
+            "diffPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/diff.png",
+            "height": 10,
+            "message": "Received message.",
+            "receivedPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/received.png",
+            "snapshotNumber": 2,
+            "snapshotPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/snapshot.png",
+            "testFileName": "src/__tests__/test-first.ts",
+            "testName": "The first snapshots",
+            "totalPixels": 100,
+            "width": 10,
+          },
+        ],
+        "titles": Array [
+          "The thing",
+          "with this other thing",
+          "does things",
+        ],
+      }
+    }
+    key="The thing-with this other thing-does things"
+  />
+</main>
+`;
+
+exports[`Main toggles the menu visibility 1`] = `
+<main
+  className="column is-12 section is-fullheight"
+>
+  <h1
+    className="title"
+  >
+    src/__tests__/test-first.ts
+  </h1>
+  <FailedTestSection
+    failedTest={
+      Object {
+        "failedSnapshots": Array [
+          Object {
+            "changedPixels": 5,
+            "changedRelative": 0.5,
+            "diffPath": "jest-screenshot-report/reports/some-identifier.snap.png/diff.png",
+            "height": 2,
+            "message": "Received message.",
+            "receivedPath": "jest-screenshot-report/reports/some-identifier.snap.png/received.png",
+            "snapshotNumber": 1,
+            "snapshotPath": "jest-screenshot-report/reports/some-identifier.snap.png/snapshot.png",
+            "testFileName": "src/__tests__/test-first.ts",
+            "testName": "The first snapshots",
+            "totalPixels": 10,
+            "width": 5,
+          },
+          Object {
+            "changedPixels": 20,
+            "changedRelative": 0.2,
+            "diffPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/diff.png",
+            "height": 10,
+            "message": "Received message.",
+            "receivedPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/received.png",
+            "snapshotNumber": 2,
+            "snapshotPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/snapshot.png",
+            "testFileName": "src/__tests__/test-first.ts",
+            "testName": "The first snapshots",
+            "totalPixels": 100,
+            "width": 10,
+          },
+        ],
+        "titles": Array [
+          "The thing",
+          "with this other thing",
+          "does things",
+        ],
+      }
+    }
+    key="The thing-with this other thing-does things"
+  />
+</main>
+`;
+
+exports[`Main toggles the menu visibility 2`] = `
+<main
+  className="column is-9 section is-fullheight"
+>
+  <h1
+    className="title"
+  >
+    src/__tests__/test-first.ts
+  </h1>
+  <FailedTestSection
+    failedTest={
+      Object {
+        "failedSnapshots": Array [
+          Object {
+            "changedPixels": 5,
+            "changedRelative": 0.5,
+            "diffPath": "jest-screenshot-report/reports/some-identifier.snap.png/diff.png",
+            "height": 2,
+            "message": "Received message.",
+            "receivedPath": "jest-screenshot-report/reports/some-identifier.snap.png/received.png",
+            "snapshotNumber": 1,
+            "snapshotPath": "jest-screenshot-report/reports/some-identifier.snap.png/snapshot.png",
+            "testFileName": "src/__tests__/test-first.ts",
+            "testName": "The first snapshots",
+            "totalPixels": 10,
+            "width": 5,
+          },
+          Object {
+            "changedPixels": 20,
+            "changedRelative": 0.2,
+            "diffPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/diff.png",
+            "height": 10,
+            "message": "Received message.",
+            "receivedPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/received.png",
+            "snapshotNumber": 2,
+            "snapshotPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/snapshot.png",
+            "testFileName": "src/__tests__/test-first.ts",
+            "testName": "The first snapshots",
+            "totalPixels": 100,
+            "width": 10,
+          },
+        ],
+        "titles": Array [
+          "The thing",
+          "with this other thing",
+          "does things",
+        ],
+      }
+    }
+    key="The thing-with this other thing-does things"
+  />
+</main>
+`;

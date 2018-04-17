@@ -1,0 +1,285 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DiffSideBySide looks as expected 1`] = `
+<React.Fragment>
+  <nav
+    className="level settings"
+  >
+    <div
+      className="level-item has-text-centered"
+    >
+      <div>
+        <div
+          className="heading"
+        >
+          Diff Opacity
+        </div>
+        <input
+          className="title"
+          max={1}
+          min={0}
+          onChange={[Function]}
+          step="any"
+          type="range"
+          value={0.5}
+        />
+      </div>
+    </div>
+  </nav>
+  <div
+    className="viewer-container"
+  >
+    <div
+      className="viewer-received"
+    >
+      <img
+        src="reports/something/received.png"
+      />
+      <div
+        className="viewer-diff"
+      >
+        <img
+          src="reports/something/diff.png"
+          style={
+            Object {
+              "opacity": 0.5,
+            }
+          }
+        />
+      </div>
+    </div>
+    <div
+      className="viewer-snapshot"
+    >
+      <img
+        src="reports/something/snapshot.png"
+      />
+      <div
+        className="viewer-diff"
+      >
+        <img
+          src="reports/something/diff.png"
+          style={
+            Object {
+              "opacity": 0.5,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</React.Fragment>
+`;
+
+exports[`DiffSideBySide when setting the diff opacity to 0 1`] = `
+<React.Fragment>
+  <nav
+    className="level settings"
+  >
+    <div
+      className="level-item has-text-centered"
+    >
+      <div>
+        <div
+          className="heading"
+        >
+          Diff Opacity
+        </div>
+        <input
+          className="title"
+          max={1}
+          min={0}
+          onChange={[Function]}
+          step="any"
+          type="range"
+          value={0}
+        />
+      </div>
+    </div>
+  </nav>
+  <div
+    className="viewer-container"
+  >
+    <div
+      className="viewer-received"
+    >
+      <img
+        src="reports/something/received.png"
+      />
+      <div
+        className="viewer-diff"
+      >
+        <img
+          src="reports/something/diff.png"
+          style={
+            Object {
+              "opacity": 0,
+            }
+          }
+        />
+      </div>
+    </div>
+    <div
+      className="viewer-snapshot"
+    >
+      <img
+        src="reports/something/snapshot.png"
+      />
+      <div
+        className="viewer-diff"
+      >
+        <img
+          src="reports/something/diff.png"
+          style={
+            Object {
+              "opacity": 0,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</React.Fragment>
+`;
+
+exports[`DiffSideBySide when setting the diff opacity to 0.7 1`] = `
+<React.Fragment>
+  <nav
+    className="level settings"
+  >
+    <div
+      className="level-item has-text-centered"
+    >
+      <div>
+        <div
+          className="heading"
+        >
+          Diff Opacity
+        </div>
+        <input
+          className="title"
+          max={1}
+          min={0}
+          onChange={[Function]}
+          step="any"
+          type="range"
+          value={0.7}
+        />
+      </div>
+    </div>
+  </nav>
+  <div
+    className="viewer-container"
+  >
+    <div
+      className="viewer-received"
+    >
+      <img
+        src="reports/something/received.png"
+      />
+      <div
+        className="viewer-diff"
+      >
+        <img
+          src="reports/something/diff.png"
+          style={
+            Object {
+              "opacity": 0.7,
+            }
+          }
+        />
+      </div>
+    </div>
+    <div
+      className="viewer-snapshot"
+    >
+      <img
+        src="reports/something/snapshot.png"
+      />
+      <div
+        className="viewer-diff"
+      >
+        <img
+          src="reports/something/diff.png"
+          style={
+            Object {
+              "opacity": 0.7,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</React.Fragment>
+`;
+
+exports[`DiffSideBySide when setting the diff opacity to 1 1`] = `
+<React.Fragment>
+  <nav
+    className="level settings"
+  >
+    <div
+      className="level-item has-text-centered"
+    >
+      <div>
+        <div
+          className="heading"
+        >
+          Diff Opacity
+        </div>
+        <input
+          className="title"
+          max={1}
+          min={0}
+          onChange={[Function]}
+          step="any"
+          type="range"
+          value={1}
+        />
+      </div>
+    </div>
+  </nav>
+  <div
+    className="viewer-container"
+  >
+    <div
+      className="viewer-received"
+    >
+      <img
+        src="reports/something/received.png"
+      />
+      <div
+        className="viewer-diff"
+      >
+        <img
+          src="reports/something/diff.png"
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        />
+      </div>
+    </div>
+    <div
+      className="viewer-snapshot"
+    >
+      <img
+        src="reports/something/snapshot.png"
+      />
+      <div
+        className="viewer-diff"
+      >
+        <img
+          src="reports/something/diff.png"
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</React.Fragment>
+`;

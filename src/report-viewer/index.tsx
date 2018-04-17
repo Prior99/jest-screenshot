@@ -11,12 +11,12 @@ tsdi.enableComponentScanner();
 const cx = classNames.bind(bulma);
 
 ReactDOM.render(
-    <div>
+    <>
         <Navigation />
         <div className={cx("columns")}>
             <Sidebar />
             <Main />
         </div>
-    </div>,
+    </>,
     document.getElementById("root"),
 );

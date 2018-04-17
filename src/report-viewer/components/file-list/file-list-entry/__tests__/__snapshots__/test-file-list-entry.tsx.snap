@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FileListEntry looks as expected 1`] = `
+<li>
+  <a
+    className="is-active"
+    onClick={[Function]}
+  >
+    src/__tests__/test-first.ts
+  </a>
+</li>
+`;

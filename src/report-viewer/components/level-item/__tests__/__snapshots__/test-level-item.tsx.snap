@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LevelItem looks as expected 1`] = `
+<div
+  className="level-item has-text-centered"
+>
+  <div>
+    <p
+      className="heading"
+    >
+      Some name
+    </p>
+    <p
+      className="title"
+    >
+      Some value
+    </p>
+  </div>
+</div>
+`;

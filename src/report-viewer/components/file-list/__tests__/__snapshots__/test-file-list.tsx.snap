@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FileList looks as expected 1`] = `
+<ul
+  className="menu-list"
+>
+  <FileListEntry
+    file={
+      Object {
+        "failedTests": Array [
+          Object {
+            "failedSnapshots": Array [
+              Object {
+                "changedPixels": 5,
+                "changedRelative": 0.5,
+                "diffPath": "jest-screenshot-report/reports/some-identifier.snap.png/diff.png",
+                "height": 2,
+                "message": "Received message.",
+                "receivedPath": "jest-screenshot-report/reports/some-identifier.snap.png/received.png",
+                "snapshotNumber": 1,
+                "snapshotPath": "jest-screenshot-report/reports/some-identifier.snap.png/snapshot.png",
+                "testFileName": "src/__tests__/test-first.ts",
+                "testName": "The first snapshots",
+                "totalPixels": 10,
+                "width": 5,
+              },
+              Object {
+                "changedPixels": 20,
+                "changedRelative": 0.2,
+                "diffPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/diff.png",
+                "height": 10,
+                "message": "Received message.",
+                "receivedPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/received.png",
+                "snapshotNumber": 2,
+                "snapshotPath": "jest-screenshot-report/reports/some-other-identifier.snap.png/snapshot.png",
+                "testFileName": "src/__tests__/test-first.ts",
+                "testName": "The first snapshots",
+                "totalPixels": 100,
+                "width": 10,
+              },
+            ],
+            "titles": Array [
+              "The thing",
+              "with this other thing",
+              "does things",
+            ],
+          },
+        ],
+        "testFilePath": "src/__tests__/test-first.ts",
+      }
+    }
+    key="src/__tests__/test-first.ts"
+  />
+  <FileListEntry
+    file={
+      Object {
+        "failedTests": Array [
+          Object {
+            "failedSnapshots": Array [
+              Object {
+                "changedPixels": 75,
+                "changedRelative": 0.75,
+                "diffPath": "jest-screenshot-report/reports/some-third-identifier.snap.png/diff.png",
+                "height": 20,
+                "message": "Received other message.",
+                "receivedPath": "jest-screenshot-report/reports/some-third-identifier.snap.png/received.png",
+                "snapshotNumber": 1,
+                "snapshotPath": "jest-screenshot-report/reports/some-third-identifier.snap.png/snapshot.png",
+                "testFileName": "src/__tests__/test-second.ts",
+                "testName": "The second snapshots",
+                "totalPixels": 100,
+                "width": 5,
+              },
+            ],
+            "titles": Array [
+              "The second thing",
+              "with this specific behaviour",
+              "does other things",
+            ],
+          },
+        ],
+        "testFilePath": "src/__tests__/test-second.ts",
+      }
+    }
+    key="src/__tests__/test-second.ts"
+  />
+</ul>
+`;

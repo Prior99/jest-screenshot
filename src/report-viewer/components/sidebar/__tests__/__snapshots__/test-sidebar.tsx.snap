@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar looks as expected 1`] = `
+<aside
+  className="column is-3 section is-fullheight menu"
+>
+  <p
+    className="menu-label"
+  />
+  <FileList />
+</aside>
+`;

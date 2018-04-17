@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageDiffViewer looks as expected 1`] = `
+<article>
+  <div
+    className="tabs is-toggle is-center is-fullwidth"
+  >
+    <ul>
+      <li
+        className="is-active"
+      >
+        <a
+          onClick={[Function]}
+        >
+          Slider
+        </a>
+      </li>
+      <li
+        className=""
+      >
+        <a
+          onClick={[Function]}
+        >
+          Side-by-side
+        </a>
+      </li>
+      <li
+        className=""
+      >
+        <a
+          onClick={[Function]}
+        >
+          Blend
+        </a>
+      </li>
+    </ul>
+  </div>
+  <DiffSlider
+    diff="reports/something/diff.png"
+    height={100}
+    received="reports/something/received.png"
+    snapshot="reports/something/snapshot.png"
+    width={100}
+  />
+</article>
+`;
+
+exports[`ImageDiffViewer when clicking on tab #0 1`] = `
+<article>
+  <div
+    className="tabs is-toggle is-center is-fullwidth"
+  >
+    <ul>
+      <li
+        className="is-active"
+      >
+        <a
+          onClick={[Function]}
+        >
+          Slider
+        </a>
+      </li>
+      <li
+        className=""
+      >
+        <a
+          onClick={[Function]}
+        >
+          Side-by-side
+        </a>
+      </li>
+      <li
+        className=""
+      >
+        <a
+          onClick={[Function]}
+        >
+          Blend
+        </a>
+      </li>
+    </ul>
+  </div>
+  <DiffSlider
+    diff="reports/something/diff.png"
+    height={100}
+    received="reports/something/received.png"
+    snapshot="reports/something/snapshot.png"
+    width={100}
+  />
+</article>
+`;
+
+exports[`ImageDiffViewer when clicking on tab #1 1`] = `
+<article>
+  <div
+    className="tabs is-toggle is-center is-fullwidth"
+  >
+    <ul>
+      <li
+        className=""
+      >
+        <a
+          onClick={[Function]}
+        >
+          Slider
+        </a>
+      </li>
+      <li
+        className="is-active"
+      >
+        <a
+          onClick={[Function]}
+        >
+          Side-by-side
+        </a>
+      </li>
+      <li
+        className=""
+      >
+        <a
+          onClick={[Function]}
+        >
+          Blend
+        </a>
+      </li>
+    </ul>
+  </div>
+  <DiffSideBySide
+    diff="reports/something/diff.png"
+    height={100}
+    received="reports/something/received.png"
+    snapshot="reports/something/snapshot.png"
+    width={100}
+  />
+</article>
+`;
+
+exports[`ImageDiffViewer when clicking on tab #2 1`] = `
+<article>
+  <div
+    className="tabs is-toggle is-center is-fullwidth"
+  >
+    <ul>
+      <li
+        className=""
+      >
+        <a
+          onClick={[Function]}
+        >
+          Slider
+        </a>
+      </li>
+      <li
+        className=""
+      >
+        <a
+          onClick={[Function]}
+        >
+          Side-by-side
+        </a>
+      </li>
+      <li
+        className="is-active"
+      >
+        <a
+          onClick={[Function]}
+        >
+          Blend
+        </a>
+      </li>
+    </ul>
+  </div>
+  <DiffBlend
+    diff="reports/something/diff.png"
+    height={100}
+    received="reports/something/received.png"
+    snapshot="reports/something/snapshot.png"
+    width={100}
+  />
+</article>
+`;

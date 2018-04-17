@@ -4,8 +4,6 @@ import * as Enzyme from "enzyme";
 import * as Adapter from "enzyme-adapter-react-16";
 import { TSDI } from "tsdi";
 
-let tsdi: TSDI;
-
 Enzyme.configure({ adapter: new Adapter() });
 
 beforeEach(() => {
@@ -80,10 +78,10 @@ beforeEach(() => {
         ],
     },
 
-    tsdi = new TSDI();
-    tsdi.enableComponentScanner();
+    (global as any).tsdi = new TSDI();
+    (global as any).tsdi.enableComponentScanner();
 });
 
 afterEach(() => {
-    tsdi.close();
+    (global as any).tsdi.close();
 });

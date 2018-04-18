@@ -1,0 +1,22 @@
+{
+  "name": "jest-screenshot-benchmark",
+  "description": "Benchmark for jest-screenshot.",
+  "main": "src/index.js",
+  "author": "Frederick Gnodtke",
+  "scripts": {
+    "start": "node src",
+    "test:jest-screenshot": "jest -i --config jest-config-jest-screenshot.json",
+    "test:jest-image-snapshot": "jest -i --config jest-config-jest-image-snapshot.json"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "babel-jest": "^22.4.3",
+    "babel-preset-env": "^1.6.1",
+    "benchmark": "^2.1.4",
+    "chart.js": "2.6",
+    "chartjs-node": "^1.6.1",
+    "jest": "^22.4.3",
+    "jest-image-snapshot": "^2.4.0",
+    "jest-screenshot": "file:.."
+  }
+}

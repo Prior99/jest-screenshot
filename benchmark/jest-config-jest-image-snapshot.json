@@ -1,0 +1,14 @@
+{
+    "collectCoverage": false,
+    "moduleFileExtensions": ["js"],
+    "testMatch": [
+        "<rootDir>/src/suite-jest-image-snapshot.js"
+    ],
+    "transform": {
+        ".*\\.js$": "babel-jest"
+    },
+    "modulePaths": [
+        "node_modules"
+    ],
+    "reporters": ["default"]
+}

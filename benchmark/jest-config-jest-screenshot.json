@@ -1,0 +1,17 @@
+{
+    "collectCoverage": false,
+    "moduleFileExtensions": ["js"],
+    "testMatch": [
+        "<rootDir>/src/suite-jest-screenshot.js"
+    ],
+    "transform": {
+        ".*\\.js$": "babel-jest"
+    },
+    "modulePaths": [
+        "node_modules"
+    ],
+    "reporters": [
+        "default",
+        "jest-screenshot/reporter"
+    ]
+}

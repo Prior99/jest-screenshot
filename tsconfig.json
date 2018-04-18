@@ -6,10 +6,10 @@
         "noImplicitAny": true,
         "removeComments": false,
         "experimentalDecorators": true,
+        "jsx": "react",
         "outDir": "dist",
         "lib": ["es2016", "dom"],
         "moduleResolution": "node",
-        "jsx": "react",
         "emitDecoratorMetadata": true
     },
     "exclude": [

@@ -9,6 +9,7 @@
         "jsx": "react",
         "outDir": "dist",
         "lib": ["es2016", "dom"],
+        "rootDir": "./src",
         "moduleResolution": "node"
     },
     "exclude": [
@@ -17,6 +18,7 @@
         "node_modules.",
         "dist/",
         "example/",
+        "jest-framework-setup.ts",
         "index.d.ts"
     ]
 }

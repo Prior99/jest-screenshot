@@ -1,5 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`toMatchImageSnapshot after a failing snapshot test creates the necessary reports 1`] = `
+Object {
+  "changedPixels": 2272,
+  "changedRelative": 0.4544,
+  "diffPath": "reports/test-to-match-image-snapshot-ts-to-match-image-snapshot-after-a-failing-snapshot-test-creates-the-necessary-reports-1-86dd5.snap.png/diff.png",
+  "height": 50,
+  "message": "[31mReceived value[39m does not match [32mstored snapshot 1[39m.
+
+Expected less than [32m0.00%[39m of the pixels to have changed, but [31m45.44%[39m of the pixels changed.",
+  "receivedPath": "reports/test-to-match-image-snapshot-ts-to-match-image-snapshot-after-a-failing-snapshot-test-creates-the-necessary-reports-1-86dd5.snap.png/received.png",
+  "snapshotNumber": 1,
+  "snapshotPath": "reports/test-to-match-image-snapshot-ts-to-match-image-snapshot-after-a-failing-snapshot-test-creates-the-necessary-reports-1-86dd5.snap.png/snapshot.png",
+  "testFileName": "src/__tests__/test-to-match-image-snapshot.ts",
+  "testName": "toMatchImageSnapshot after a failing snapshot test creates the necessary reports",
+  "totalPixels": 5000,
+  "width": 100,
+}
+`;
+
 exports[`toMatchImageSnapshot when called outside of a jest unit test context fails 1`] = `"Jest: Attempted to call \`.toMatchImageSnapshot()\` outside of Jest context."`;
 
 exports[`toMatchImageSnapshot with \`.not\` specified fails always 1`] = `"Jest: \`.not\` cannot be used with \`.toMatchImageSnapshot()\`."`;

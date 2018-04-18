@@ -1,7 +1,8 @@
 import { setupJestScreenshot } from "..";
 import { toMatchImageSnapshot } from "../to-match-image-snapshot";
 import { SnapshotState, JestTestConfiguration } from "../jest";
-import { readFileSync, unlinkSync, existsSync, writeFileSync } from "fs";
+import { readdirSync, readFileSync, unlinkSync, existsSync, writeFileSync } from "fs";
+import * as rimraf from "rimraf";
 
 function getJestTestConfiguration(): JestTestConfiguration {
     let testConfiguration: JestTestConfiguration;
@@ -176,5 +177,41 @@ describe("toMatchImageSnapshot", () => {
             }).not.toThrowError();
             expect(existsSync(snapshotToCreatePath)).toBe(true);
         });
+    });
+
+    it("after a failing snapshot test creates the necessary reports", () => {
+        rimraf.sync(`${process.cwd()}/jest-screenshot-report`);
+
+        setupJestScreenshot();
+        expect(() => {
+            expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
+        }).toThrowError();
+
+        const snapshotFilename = "test-to-match-image-snapshot-ts-to-match-image-snapshot-after-a-failing-snapshot-test-creates-the-necessary-reports-1-86dd5.snap.png"; // tslint:disable-line
+        const contents = readdirSync(`${process.cwd()}/jest-screenshot-report/reports`);
+        expect(contents).toContain(snapshotFilename);
+        const snapshotContents = readdirSync(`${process.cwd()}/jest-screenshot-report/reports/${snapshotFilename}`);
+        expect(snapshotContents).toEqual([
+            "diff.png",
+            "info.json",
+            "received.png",
+            "snapshot.png",
+        ]);
+        const infoFileContents =
+            readFileSync(`${process.cwd()}/jest-screenshot-report/reports/${snapshotFilename}/info.json`, "utf8");
+        expect(JSON.parse(infoFileContents)).toMatchSnapshot();
+    });
+
+    it("doesn't create a report with `noReport` set to `true`", () => {
+        rimraf.sync(`${process.cwd()}/jest-screenshot-report`);
+
+        writeFileSync(`${process.cwd()}/jest-screenshot.json`, JSON.stringify({ noReport: true }));
+        setupJestScreenshot();
+        expect(() => {
+            expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
+        }).toThrowError();
+
+        expect(existsSync(`${process.cwd()}/jest-screenshot-report`)).toBe(false);
+        unlinkSync(`${process.cwd()}/jest-screenshot.json`);
     });
 });

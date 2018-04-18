@@ -97,7 +97,7 @@ export function toMatchImageSnapshot(
     configuration: JestScreenshotConfiguration,
 ): MatcherResult {
     (process as any).lol = "ROFL";
-    const { snapshotsDir, reportDir } = configuration;
+    const { snapshotsDir, reportDir, noReport } = configuration;
     // Check whether `this` is really the expected Jest configuration.
     if (!isJestTestConfiguration(this)) {
         throw new Error("Jest: Attempted to call `.toMatchImageSnapshot()` outside of Jest context.");
@@ -149,7 +149,7 @@ export function toMatchImageSnapshot(
             writeFileSync(snapshotPath, received);
             return { pass: true };
         }
-        if (reportPath) {
+        if (!noReport) {
             mkdirp(reportPath);
             const receivedPath = path.join(reportPath, "received.png");
             const diffPath = path.join(reportPath, "diff.png");

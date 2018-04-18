@@ -1,4 +1,4 @@
-import { config } from "./config";
+import { config, JestScreenshotConfiguration } from "./config";
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync, unlinkSync } from "fs";
 import * as path from "path";
 import { sync as rimrafSync } from "rimraf";
@@ -20,19 +20,24 @@ const template = (testResults: ReportMetadata) => `<html>
     </body>
 </html>`;
 
-const { reportDir: reportDirName } = config();
-const reportDir = getReportDir(reportDirName);
-const reportsDir = path.join(reportDir, "reports");
 
 export = class JestScreenshotReporter { // tslint:disable-line
+    private config = config();
+
     constructor() {
+        const { reportDir: reportDirName } = this.config;
+        const reportDir = getReportDir(reportDirName);
         if (existsSync(reportDir)) {
             rimrafSync(reportDir);
         }
     }
 
     public onRunComplete(contexts: Set<jest.Context>, { testResults, numFailedTests }: jest.AggregatedResult) {
+        const { reportDir: reportDirName, noReport } = this.config;
+        const reportDir = getReportDir(reportDirName);
+        const reportsDir = path.join(reportDir, "reports");
         // if (numFailedTests === 0) { return; }
+        if (noReport) { return; }
         if (!existsSync(reportsDir)) { return; }
         const failedSnapshots = readdirSync(reportsDir).map(testPath => {
             const infoFilePath = path.join(reportDir, "reports", testPath, "info.json");

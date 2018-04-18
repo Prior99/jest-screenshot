@@ -38,6 +38,10 @@ export interface JestScreenshotConfiguration {
      * Will be relative to the project's root directory.
      */
     reportDir?: string;
+    /**
+     * Disables generating of reports.
+     */
+    noReport?: boolean;
 }
 
 function getFileConfig() {

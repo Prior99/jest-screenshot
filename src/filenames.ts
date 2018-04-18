@@ -55,7 +55,7 @@ export function getSnapshotPath(
     return path.join(path.dirname(testPath), snapshotsDir || "__snapshots__", fileName);
 }
 
-export function getReportDir(reportDir: string) {
+export function getReportDir(reportDir?: string) {
     return path.join(
         process.cwd(),
         reportDir || "jest-screenshot-report",
@@ -66,10 +66,9 @@ export function getReportPath(
     testPath: string,
     currentTestName: string,
     snapshotState: SnapshotState,
-    reportDir: string,
+    reportDir?: string,
 ) {
     const counter = (snapshotState._counters.get(currentTestName) || 0) + 1;
-    if (reportDir === null) { return; }
     return path.join(
         getReportDir(reportDir),
         "reports",

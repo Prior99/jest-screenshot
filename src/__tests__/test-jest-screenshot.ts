@@ -13,4 +13,11 @@ describe("jestScreenshot", () => {
             { pixelThresholdRelative: 0 },
         );
     });
+
+    it("throws an error if called outside of jest", () => {
+        const originalExpect = expect;
+        (global as any).expect = undefined;
+        originalExpect(() => setupJestScreenshot()).toThrowErrorMatchingSnapshot();
+        (global as any).expect = originalExpect;
+    });
 });

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`jestScreenshot throws an error if called outside of jest 1`] = `"Jest: Could not find \`expect\`. Can't setup jest-screenshot."`;

@@ -1,5 +1,17 @@
 {
   "name": "jest-screenshot",
+  "keywords": [
+      "test",
+      "css",
+      "visual testing",
+      "visual regression",
+      "jest",
+      "browser testing",
+      "puppeteer",
+      "snapshot",
+      "screenshot",
+      "diff"
+  ],
   "version": "0.1.0",
   "description": "A jest extension to deal with screenshots and all sorts of images.",
   "main": "dist/index.js",

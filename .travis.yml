@@ -10,6 +10,7 @@ install:
 
 script:
   - yarn build
+  - yarn webpack
   - yarn lint
   - yarn test
 

@@ -18,12 +18,8 @@
   },
   "files": [
     "index.d.ts",
-    "./dist",
-    "./docs",
-    "./example",
-    "./src",
-    "./LICENSE",
-    "./README.md"
+    "reporter.js",
+    "./dist"
   ],
   "jest": {
     "coverageThreshold": {

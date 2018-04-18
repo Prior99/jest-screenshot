@@ -35,31 +35,20 @@
       }
     },
     "collectCoverage": true,
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
+    "moduleFileExtensions": ["ts", "tsx", "js"],
     "transform": {
       "^.+\\.(ts|tsx)$": "ts-jest"
     },
     "testMatch": [
       "**/__tests__/test-*.(ts|js|tsx)"
     ],
-    "testPathIgnorePatterns": [
-      "/example/"
+    "testPathIgnorePatterns": ["/example/"],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/jest-framework-setup.ts"
     ],
-    "reporters": [
-      "default",
-      "<rootDir>/dist/reporter"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
+    "reporters": ["default", "<rootDir>/dist/reporter"],
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "mapCoverage": true,
     "moduleNameMapper": {
       "^.+\\.(css|scss|sass)$": "identity-obj-proxy",

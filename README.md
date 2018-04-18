@@ -20,6 +20,7 @@ Please also refer to the **[Documentation](https://prior99.github.io/jest-screen
         * [Configuring](#configuring)
             * [Example](#example)
     * [Usage](#usage)
+    * [Benchmark](#benchmark)
     * [Reports](#reports)
     * [Contributing](#contributing)
     * [Contributors](#contributors)
@@ -106,7 +107,7 @@ It will detect any pixel as changed even if the color only differs minimally and
 
 Take a look at [the example project](example/).
 
-Afterwards, it can be used to compare images with snapshots:
+This library can be used to compare images with snapshots:
 
 ```typescript
 describe("My fancy image", () => {
@@ -129,6 +130,22 @@ describe("My fancy webpage", () => {
     });
 });
 ```
+
+## Benchmark
+
+This library is around 10x faster than [jest-image-snapshot](https://github.com/americanexpress/jest-image-snapshot).
+
+In the benchmark a whole unit test suite, including setup and teardown of the jest environment and 30 unit tests (10 matching,
+10 not matching and 10 newly created) were measured. Writing of the report is also included.
+
+![Benchmark](images/benchmark.png)
+
+The X axis displays the amount of executed suites per second.
+
+In average:
+
+ * **jest-screenshot** took **~9 seconds** for 30 tests and
+ * **jest-image-snapshot** took **>100 seconds**.
 
 ## Reports
 

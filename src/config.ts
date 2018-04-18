@@ -1,10 +1,6 @@
 import * as path from "path";
 import { existsSync, readFileSync } from "fs";
 
-export type IdentifierGenerator = (testPath: string, currentTestName: string, counter: number) => string;
-
-export type ReportPathGenerator = (testPath: string, currentTestName: string, counter: number) => string;
-
 export interface JestScreenshotConfiguration {
     /**
      * Passed to **native-image-diff**. Will disable or enable antialiasing detection.

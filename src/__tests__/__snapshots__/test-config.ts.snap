@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`config() throws an error with a broken config file 1`] = `"Jest: Failed to parse jest-screenshot config at \\"/home/prior/repositories/jest-screenshot/tmp-test-config/jest-screenshot.json\\": Unexpected end of JSON input"`;
+exports[`config() throws an error with a broken config file 1`] = `"Jest: Failed to parse jest-screenshot config at \\"jest-screenshot.json\\": Unexpected end of JSON input"`;
 
-exports[`config() throws an error with a broken package.json 1`] = `"Jest: Failed to parse package.json at \\"/home/prior/repositories/jest-screenshot/tmp-test-config/package.json\\": Unexpected end of JSON input"`;
+exports[`config() throws an error with a broken package.json 1`] = `"Jest: Failed to parse package.json at \\"package.json\\": Unexpected end of JSON input"`;

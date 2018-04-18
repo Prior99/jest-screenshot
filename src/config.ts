@@ -50,7 +50,7 @@ function getFileConfig() {
     try {
         return JSON.parse(readFileSync(filePath, "utf8"));
     } catch (err) {
-        throw new Error(`Jest: Failed to parse jest-screenshot config at "${filePath}": ${err.message}`);
+        throw new Error(`Jest: Failed to parse jest-screenshot config at "jest-screenshot.json": ${err.message}`);
     }
 }
 
@@ -61,7 +61,7 @@ function getPackageConfig() {
         const packageContent = JSON.parse(readFileSync(packagePath, "utf8"));
         return packageContent.jestScreenshot;
     } catch (err) {
-        throw new Error(`Jest: Failed to parse package.json at "${packagePath}": ${err.message}`);
+        throw new Error(`Jest: Failed to parse package.json at "package.json": ${err.message}`);
     }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "jest-screenshot",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A jest extension to deal with screenshots and all sorts of images.",
   "main": "dist/index.js",
   "author": "Frederick Gnodtke",

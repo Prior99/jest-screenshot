@@ -79,6 +79,7 @@ you can configure it:
 | `pixelThresholdRelative` | number   | `0`                      | If specified, **jest-screenshot** will fail if more than the specified relative amount of pixels are different from the snapshot. When setting this to `0.5` for example, more than 50% of the pixels need to be different for the test to fail. |
 | `snapshotsDir`           | string   | `__snapshots__`          | If specified, will change the directory into which the snapshot images will be stored, relative to the unit test file. |
 | `reportDir`              | string   | `jest-screenshot-report` | If specified, will change the directory into which the HTML report will be written, relative to the project's root directory.  |
+| `noReport`               | boolean  | `false`                  | Set this to `true` in order to completely disable the HTML report.  |
 
 It's also possible to specify a key `jestScreenshot` in the **package.json** with the same interface.
 

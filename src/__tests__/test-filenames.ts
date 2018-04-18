@@ -1,4 +1,4 @@
-import { getSnapshotFileName, getSnapshotPath } from "../filenames";
+import { getSnapshotFileName, getSnapshotPath, getReportDir, getReportPath } from "../filenames";
 import { SnapshotState } from "../jest";
 
 const somePath = "/tmp/some-test.ts";
@@ -29,5 +29,22 @@ describe("getSnapshotPath", () => {
         const expectedGeneratedPath = `/tmp/__some_directory__/${expectedGeneratedName}`;
         const path = getSnapshotPath(somePath, someTestName, someSnapshotState, snapshotsDir);
         expect(path).toBe(expectedGeneratedPath);
+    });
+});
+
+describe("getReportDir", () => {
+    it("returns the expected path with a dir provided", () => {
+        expect(getReportDir("my-reports")).toBe(`${process.cwd()}/my-reports`);
+    });
+
+    it("returns the expected path with no dir provided", () => {
+        expect(getReportDir()).toBe(`${process.cwd()}/jest-screenshot-report`);
+    });
+});
+
+describe("getReportPath", () => {
+    it("returns the expected path", () => {
+        expect(getReportPath(somePath, someTestName, someSnapshotState))
+            .toBe(`${process.cwd()}/jest-screenshot-report/reports/${expectedGeneratedName}`);
     });
 });

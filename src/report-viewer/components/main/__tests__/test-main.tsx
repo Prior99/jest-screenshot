@@ -8,6 +8,11 @@ describe("Main", () => {
         expect(shallow(<Main />)).toMatchSnapshot();
     });
 
+    it("looks as expected with no reports", () => {
+        testResults.files = [];
+        expect(shallow(<Main />)).toMatchSnapshot();
+    });
+
     it("toggles the menu visibility", () => {
         const element = shallow(<Main />);
         expect(element.find("main").hasClass("is-9")).toBe(true);

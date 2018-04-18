@@ -54,6 +54,8 @@ exports[`Main looks as expected 1`] = `
 </main>
 `;
 
+exports[`Main looks as expected with no reports 1`] = `""`;
+
 exports[`Main toggles the menu visibility 1`] = `
 <main
   className="column is-12 section is-fullheight"

@@ -138,11 +138,7 @@ An HTML report with interactive tools for comparing the failed snapshots will be
 
 They might look for example like this:
 
-![Example Side-by-side](images/screenshot-report-side-by-side.png)
-
-![Example Slider](images/screenshot-report-slider.png)
-
-![Example Blend](images/screenshot-report-blend.png)
+![Example Report](images/screenshot-report.png)
 
 The report will be placed in a `jest-screenshot-report` directory in the project's root directory by default.
 

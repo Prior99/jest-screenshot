@@ -9,7 +9,7 @@ const someSnapshotState: SnapshotState = {
     updated: 0,
     added: 0,
 };
-const expectedGeneratedName = "some-test-ts-something-with-some-parameters-does-expected-things-8-223bb.snap.png";
+const expectedGeneratedName = "some-test-ts-something-with-some-parameters-does-expected-things-7-fcb3f.snap.png";
 someSnapshotState._counters.set(someTestName, 7);
 
 describe("getSnapshotFileName", () => {

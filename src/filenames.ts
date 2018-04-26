@@ -26,7 +26,7 @@ export function getSnapshotFileName(testPath: string, currentTestName: string, s
     // MD5 Hash generator.
     const md5 = createHash("md5");
     // Counter for the n-th snapshot in the test.
-    const counter = (snapshotState._counters.get(currentTestName) || 0) + 1;
+    const counter = snapshotState._counters.get(currentTestName);
     // Generate the test filename and identifier path for the maximum windows filename length.
     const testFileNamePart = kebabCase(path.basename(testPath).substr(0, 75));
     const identifierPart = kebabCase(currentTestName.substr(0, maxFilenameLength - String(counter).length));
@@ -68,7 +68,7 @@ export function getReportPath(
     snapshotState: SnapshotState,
     reportDir?: string,
 ) {
-    const counter = (snapshotState._counters.get(currentTestName) || 0) + 1;
+    const counter = snapshotState._counters.get(currentTestName);
     return path.join(
         getReportDir(reportDir),
         "reports",

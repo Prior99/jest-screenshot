@@ -152,11 +152,13 @@ describe("toMatchImageSnapshot", () => {
     });
 
     describe("with the snapshot not existing", () => {
-        const snapshotToCreatePath = `${__dirname}/__snapshots__/test-to-match-image-snapshot-ts-to-match-image-snapshot-with-the-snapshot-not-existing-creates-the-snapshot-when-updating-is-enabled-1-14292.snap.png`; // tslint:disable-line
+        const snapshotToCreatePath1 = `${__dirname}/__snapshots__/test-to-match-image-snapshot-ts-to-match-image-snapshot-with-the-snapshot-not-existing-creates-the-snapshot-when-updating-is-enabled-1-14292.snap.png`; // tslint:disable-line
+        const snapshotToCreatePath2 = `${__dirname}/__snapshots__/test-to-match-image-snapshot-ts-to-match-image-snapshot-with-the-snapshot-not-existing-creates-the-snapshot-when-updating-is-enabled-2-078e4.snap.png`; // tslint:disable-line
 
         afterEach(() => {
             try {
-                unlinkSync(snapshotToCreatePath);
+                unlinkSync(snapshotToCreatePath1);
+                unlinkSync(snapshotToCreatePath2);
             } catch (err) {
                 return;
             }
@@ -170,12 +172,15 @@ describe("toMatchImageSnapshot", () => {
         });
 
         it("creates the snapshot when updating is enabled", () => {
-            expect(existsSync(snapshotToCreatePath)).toBe(false);
+            expect(existsSync(snapshotToCreatePath1)).toBe(false);
+            expect(existsSync(snapshotToCreatePath2)).toBe(false);
             expect(() => {
                 testConfig.snapshotState._updateSnapshot = "all";
                 expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
+                expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
             }).not.toThrowError();
-            expect(existsSync(snapshotToCreatePath)).toBe(true);
+            expect(existsSync(snapshotToCreatePath1)).toBe(true);
+            expect(existsSync(snapshotToCreatePath2)).toBe(true);
         });
     });
 

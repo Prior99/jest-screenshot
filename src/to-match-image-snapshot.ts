@@ -96,7 +96,6 @@ export function toMatchImageSnapshot(
     received: Buffer,
     configuration: JestScreenshotConfiguration,
 ): MatcherResult {
-    (process as any).lol = "ROFL";
     const { snapshotsDir, reportDir, noReport } = configuration;
     // Check whether `this` is really the expected Jest configuration.
     if (!isJestTestConfiguration(this)) {
@@ -108,6 +107,8 @@ export function toMatchImageSnapshot(
     }
     let { snapshotState } = this;
     const { _updateSnapshot } = snapshotState;
+    const snapshotNumber = (snapshotState._counters.get(currentTestName) || 0) as number + 1;
+    snapshotState._counters.set(currentTestName, snapshotNumber);
     const snapshotPath = getSnapshotPath(testPath, currentTestName, snapshotState, snapshotsDir);
     const reportPath = getReportPath(testPath, currentTestName, snapshotState, reportDir);
     // Create the path to store the snapshots in.
@@ -134,7 +135,6 @@ export function toMatchImageSnapshot(
     const snapshotImage = readPngFileSync(snapshotPath);
     const receivedImage = decode(received);
     // Perform the actual diff of the images.
-    const snapshotNumber = snapshotState._counters.get(currentTestName) || 1;
     const {
         pass,
         message,

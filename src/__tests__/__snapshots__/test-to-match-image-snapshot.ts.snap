@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`toMatchImageSnapshot after a failing snapshot test creates the necessary reports 1`] = `
+exports[`toMatchImageSnapshot after a failing snapshot test creates the necessary reports 2`] = `
 Object {
   "changedPixels": 2272,
   "changedRelative": 0.4544,
@@ -23,43 +23,43 @@ exports[`toMatchImageSnapshot when called outside of a jest unit test context fa
 
 exports[`toMatchImageSnapshot with \`.not\` specified fails always 1`] = `"Jest: \`.not\` cannot be used with \`.toMatchImageSnapshot()\`."`;
 
-exports[`toMatchImageSnapshot with an absolute threshold provided fails with an absolute threshold of 204 1`] = `
+exports[`toMatchImageSnapshot with an absolute threshold provided fails with an absolute threshold of 204 2`] = `
 "[31mReceived value[39m does not match [32mstored snapshot 1[39m.
 
 Expected less than [32m204 pixels[39m to have changed, but [31m205 pixels[39m changed."
 `;
 
-exports[`toMatchImageSnapshot with no threshold provided with a color threshold of 0 detects the snapshot as not matching 1`] = `
+exports[`toMatchImageSnapshot with no threshold provided with a color threshold of 0 detects the snapshot as not matching 2`] = `
 "[31mReceived value[39m does not match [32mstored snapshot 1[39m.
 
 Expected less than [32m0.00%[39m of the pixels to have changed, but [31m53.24%[39m of the pixels changed."
 `;
 
-exports[`toMatchImageSnapshot with no threshold provided with a color threshold of 0.1 detects the snapshot as not matching 1`] = `
+exports[`toMatchImageSnapshot with no threshold provided with a color threshold of 0.1 detects the snapshot as not matching 2`] = `
 "[31mReceived value[39m does not match [32mstored snapshot 1[39m.
 
 Expected less than [32m0.00%[39m of the pixels to have changed, but [31m45.44%[39m of the pixels changed."
 `;
 
-exports[`toMatchImageSnapshot with no threshold provided with a color threshold of 0.5 detects the snapshot as not matching 1`] = `
+exports[`toMatchImageSnapshot with no threshold provided with a color threshold of 0.5 detects the snapshot as not matching 2`] = `
 "[31mReceived value[39m does not match [32mstored snapshot 1[39m.
 
 Expected less than [32m0.00%[39m of the pixels to have changed, but [31m12.52%[39m of the pixels changed."
 `;
 
-exports[`toMatchImageSnapshot with no threshold provided with a color threshold of 0.6 detects the snapshot as not matching 1`] = `
+exports[`toMatchImageSnapshot with no threshold provided with a color threshold of 0.6 detects the snapshot as not matching 2`] = `
 "[31mReceived value[39m does not match [32mstored snapshot 1[39m.
 
 Expected less than [32m0.00%[39m of the pixels to have changed, but [31m4.10%[39m of the pixels changed."
 `;
 
-exports[`toMatchImageSnapshot with the snapshot not existing fails when updating is disabled 1`] = `
+exports[`toMatchImageSnapshot with the snapshot not existing fails when updating is disabled 2`] = `
 "New snapshot was [31mnot written[39m. The update flag must be explicitly passed to write a new snapshot.
 
 This is likely because this test is run in a continuous integration (CI) environment in which snapshots are not written by default."
 `;
 
-exports[`toMatchImageSnapshot with the snapshot not matching fails when updating is disabled 1`] = `
+exports[`toMatchImageSnapshot with the snapshot not matching fails when updating is disabled 2`] = `
 "[31mReceived value[39m does not match [32mstored snapshot 1[39m.
 
 Expected less than [32m0.00%[39m of the pixels to have changed, but [31m45.44%[39m of the pixels changed."

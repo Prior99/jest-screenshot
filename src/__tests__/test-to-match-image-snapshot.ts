@@ -219,4 +219,55 @@ describe("toMatchImageSnapshot", () => {
         expect(existsSync(`${process.cwd()}/jest-screenshot-report`)).toBe(false);
         unlinkSync(`${process.cwd()}/jest-screenshot.json`);
     });
+
+    describe("with a custom path provided", () => {
+        const path = `${__dirname}/custom-path.png`;
+        beforeAll(() => {
+            rimraf.sync(`${process.cwd()}/jest-screenshot-report`);
+            setupJestScreenshot();
+        });
+
+        afterAll(() => {
+            unlinkSync(path);
+        });
+
+        it("writes a new screenshot", () => {
+            expect(() => {
+                expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-gradient.png`)).toMatchImageSnapshot({
+                    path,
+                });
+            }).not.toThrowError();
+            expect(existsSync(path)).toBe(true);
+        });
+
+        it("fails with a non-matching screenshot", () => {
+            expect(() => {
+                testConfig.snapshotState._updateSnapshot = "none";
+                expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot({
+                    path,
+                });
+            }).toThrowErrorMatchingSnapshot();
+        });
+
+        it("fails with a non-matching screenshot and writes the report", () => {
+            expect(() => {
+                testConfig.snapshotState._updateSnapshot = "none";
+                expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot({
+                    path,
+                });
+            }).toThrowErrorMatchingSnapshot();
+            const snapshotFilename = "test-to-match-image-snapshot-ts-to-match-image-snapshot-with-a-custom-path-provided-fails-with-a-non-matching-screenshot-and-writes-the-report-1-e3f07.snap.png"; // tslint:disable-line
+            const contents = readdirSync(`${process.cwd()}/jest-screenshot-report/reports`);
+            expect(contents).toContain(snapshotFilename);
+        });
+
+        it("updates the snapshot when updating is enabled", () => {
+            const expectedContent = readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`);
+            expect(() => {
+                testConfig.snapshotState._updateSnapshot = "all";
+                expect(expectedContent).toMatchImageSnapshot({ path });
+            }).not.toThrowError();
+            expect(readFileSync(path)).toEqual(expectedContent);
+        });
+    });
 });

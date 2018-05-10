@@ -11,6 +11,7 @@ describe("jestScreenshot", () => {
         expect(toMatchImageSnapshot).toHaveBeenCalledWith(
             someBuffer,
             { pixelThresholdRelative: 0 },
+            undefined,
         );
     });
 

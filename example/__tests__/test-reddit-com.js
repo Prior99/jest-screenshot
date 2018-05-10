@@ -25,4 +25,13 @@ describe("reddit.com", () => {
             expect(await page.screenshot()).toMatchImageSnapshot();
         });
     });
+
+    describe("/all", () => {
+        it("looks the same", async () => {
+            await page.goto("https://www.reddit.com/r/all/new/");
+            await dismissWelcomeNotice();
+            page.setViewport({ width: 1280, height: 720 });
+            expect(await page.screenshot()).toMatchImageSnapshot({ path: `${__dirname}/../reddit-all.png` });
+        });
+    });
 });

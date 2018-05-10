@@ -1,7 +1,9 @@
+import { ToMatchImageSnapshotParameters } from "./to-match-image-snapshot";
+
 declare global {
     namespace jest {
         interface Matchers<R> {
-            toMatchImageSnapshot(): R;
+            toMatchImageSnapshot(parameters?: ToMatchImageSnapshotParameters): R;
         }
     }
 }

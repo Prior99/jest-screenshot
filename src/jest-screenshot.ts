@@ -1,4 +1,4 @@
-import { toMatchImageSnapshot } from "./to-match-image-snapshot";
+import { toMatchImageSnapshot, ToMatchImageSnapshotParameters } from "./to-match-image-snapshot";
 import { sync as mkdirp } from "mkdirp";
 import { JestScreenshotConfiguration, config } from "./config";
 
@@ -12,8 +12,8 @@ export function setupJestScreenshot() {
         throw new Error("Jest: Could not find `expect`. Can't setup jest-screenshot.");
     }
     expect.extend({
-        toMatchImageSnapshot(received: Buffer) {
-            return toMatchImageSnapshot.call(this, received, config());
+        toMatchImageSnapshot(received: Buffer, parameters: ToMatchImageSnapshotParameters) {
+            return toMatchImageSnapshot.call(this, received, config(), parameters);
         },
     });
 }

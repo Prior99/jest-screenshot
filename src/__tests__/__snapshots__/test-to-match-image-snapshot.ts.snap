@@ -64,3 +64,16 @@ exports[`toMatchImageSnapshot with the snapshot not matching fails when updating
 
 Expected less than [32m0.00%[39m of the pixels to have changed, but [31m45.44%[39m of the pixels changed."
 `;
+
+exports[`toMatchImageSnapshot with a custom path provided fails with a non-matching screenshot 2`] = `
+"[31mReceived value[39m does not match [32mstored snapshot 1[39m.
+
+Expected less than [32m0.00%[39m of the pixels to have changed, but [31m45.44%[39m of the pixels changed."
+`;
+
+exports[`toMatchImageSnapshot with a custom path provided fails with a non-matching screenshot and writes the report 2`] = `
+"[31mReceived value[39m does not match [32mstored snapshot 1[39m.
+
+Expected less than [32m0.00%[39m of the pixels to have changed, but [31m45.44%[39m of the pixels changed."
+`;
+

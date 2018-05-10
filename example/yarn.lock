@@ -2,16 +2,6 @@
 # yarn lockfile v1
 
 
-"@types/mkdirp@^0.5.2":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@types/mkdirp/-/mkdirp-0.5.2.tgz#503aacfe5cc2703d5484326b1b27efa67a339c1f"
-  dependencies:
-    "@types/node" "*"
-
-"@types/node@*":
-  version "9.6.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.4.tgz#0ef7b4cfc3499881c81e0ea1ce61a23f6f4f5b42"
-
 abab@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -2069,11 +2059,9 @@ jest-runtime@^21.2.1:
     yargs "^9.0.0"
 
 "jest-screenshot@file:..":
-  version "0.0.0"
+  version "0.1.4"
   dependencies:
-    "@types/mkdirp" "^0.5.2"
     chalk "^2.3.2"
-    lodash-decorators "^5.0.0"
     lodash.kebabcase "^4.1.1"
     mkdirp "^0.5.1"
     native-image-diff "^0.1.1"
@@ -2265,12 +2253,6 @@ locate-path@^2.0.0:
   dependencies:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
-
-lodash-decorators@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/lodash-decorators/-/lodash-decorators-5.0.0.tgz#daf8e6888a7831e6d4088db0ed39ecdc11ec85e5"
-  dependencies:
-    tslib "^1.7.1"
 
 lodash.kebabcase@^4.1.1:
   version "4.1.1"
@@ -3363,10 +3345,6 @@ tr46@~0.0.3:
 trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
-
-tslib@^1.7.1:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
 
 tunnel-agent@^0.6.0:
   version "0.6.0"

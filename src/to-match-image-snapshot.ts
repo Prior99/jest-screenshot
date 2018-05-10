@@ -17,6 +17,14 @@ export interface ImageMatcherResult extends MatcherResult {
     snapshotNumber?: number;
 }
 
+export interface ToMatchImageSnapshotParameters {
+    /**
+     * Can be used to override the path to which the snapshot image
+     * will be written.
+     */
+    path?: string;
+}
+
 /**
  * Performs the actual check for equality of two images.
  *
@@ -89,12 +97,14 @@ function checkImages(
  * @param received The buffer from the call to `expect(...)`.
  * @param configuration The configuration object provided when initializing this library
  *     with a call to `jestScreenshot`.
+ * @param parameters Optional parameters provided to the call of `expect(...).toMatchImageSnapshot(...)`.
  *
  * @return A `MatcherResult` usable by jest.
  */
 export function toMatchImageSnapshot(
     received: Buffer,
     configuration: JestScreenshotConfiguration,
+    parameters: ToMatchImageSnapshotParameters = {},
 ): MatcherResult {
     const { snapshotsDir, reportDir, noReport } = configuration;
     // Check whether `this` is really the expected Jest configuration.
@@ -109,7 +119,9 @@ export function toMatchImageSnapshot(
     const { _updateSnapshot } = snapshotState;
     const snapshotNumber = (snapshotState._counters.get(currentTestName) || 0) as number + 1;
     snapshotState._counters.set(currentTestName, snapshotNumber);
-    const snapshotPath = getSnapshotPath(testPath, currentTestName, snapshotState, snapshotsDir);
+    const snapshotPath = typeof parameters.path === "string" ?
+        parameters.path :
+        getSnapshotPath(testPath, currentTestName, snapshotState, snapshotsDir);
     const reportPath = getReportPath(testPath, currentTestName, snapshotState, reportDir);
     // Create the path to store the snapshots in.
     mkdirp(path.dirname(snapshotPath));

@@ -131,6 +131,18 @@ describe("My fancy webpage", () => {
 });
 ```
 
+It is possible to specify a custom path to store the snapshot at:
+
+```typescript
+describe("My fancy image", () => {
+    const myFancyImage = readFileSync("../my-fancy-image.png");
+
+    it("looks as beautiful as always", () => {
+        expect(myFancyImage).toMatchImageSnapshot({ path: "../../my-fancy-image.snap.png" });
+    });
+});
+```
+
 ## Benchmark
 
 This library is around 10x faster than [jest-image-snapshot](https://github.com/americanexpress/jest-image-snapshot).

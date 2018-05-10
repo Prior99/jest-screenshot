@@ -233,6 +233,7 @@ describe("toMatchImageSnapshot", () => {
 
         it("writes a new screenshot", () => {
             expect(() => {
+                testConfig.snapshotState._updateSnapshot = "all";
                 expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-gradient.png`)).toMatchImageSnapshot({
                     path,
                 });

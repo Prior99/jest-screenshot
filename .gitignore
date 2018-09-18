@@ -3,3 +3,4 @@ coverage/
 dist/
 docs/
 jest-screenshot-report/
+/.idea

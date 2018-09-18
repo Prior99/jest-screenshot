@@ -143,6 +143,29 @@ describe("My fancy image", () => {
 });
 ```
 
+It is possible to import ```toMatchImageSnapshot()``` for custom assertions.
+As it requires configuration as second argument, ```config()``` function 
+(_which is responsible for reading configuration from  jest-screenshot.json/package.json_) is also exposed.
+
+```typescript
+import {config, toMatchImageSnapshot} from 'jest-screenshot';
+
+expect.extend({
+  customMatcher(received, name) {
+    const image = customGetImage(received); // i.e. via puppeteer, html2canvas etc
+    const configuration = config(); // get existing config
+    if(process.env.LOOSE_SCREENSHOTS_MATCH) {
+        // loose mismatch threshold for specific environment setting
+        configuration.pixelThresholdRelative = configuration.pixelThresholdRelative + 0.1
+    }
+    return toMatchImageSnapshot.call(this, image, configuration, {
+        // build custom path for screenshot
+        path: `/custom_file_path/${configuration.snapshotsDir}/custom_file_prefix_${name}.png`
+    });
+  }
+});
+```
+
 ## Benchmark
 
 This library is around 10x faster than [jest-image-snapshot](https://github.com/americanexpress/jest-image-snapshot).

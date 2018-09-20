@@ -143,8 +143,15 @@ export function toMatchImageSnapshot(
                 `in which snapshots are not written by default.`,
         };
     }
+
+    // If received and expected Buffers are equal, there is no need to perform actual check
+    const snapshotBuffer = readFileSync(snapshotPath);
+    if (snapshotBuffer.equals(received)) {
+        return { pass: true };
+    }
+
     // Decode the new image and read the snapshot.
-    const snapshotImage = readPngFileSync(snapshotPath);
+    const snapshotImage = decode(snapshotBuffer);
     const receivedImage = decode(received);
     // Perform the actual diff of the images.
     const {

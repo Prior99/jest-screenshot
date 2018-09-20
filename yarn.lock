@@ -5007,9 +5007,9 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-native-image-diff@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/native-image-diff/-/native-image-diff-0.1.1.tgz#ecb1a5e22580d45c3933d072590960cbfcbec2e9"
+native-image-diff@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/native-image-diff/-/native-image-diff-0.1.7.tgz#84e17a94a9ff1527b367b1ba0c9cdee26e77ebe7"
   dependencies:
     request "^2.85.0"
 
@@ -5067,9 +5067,9 @@ node-int64@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"
 
-node-libpng@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/node-libpng/-/node-libpng-0.2.0.tgz#9917e3d24315e8126902c897c71a7b10840ef975"
+node-libpng@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/node-libpng/-/node-libpng-0.2.6.tgz#2d71f5479d2527946075bf92ac507d5200a197a4"
   dependencies:
     request "^2.85.0"
 

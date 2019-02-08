@@ -65,7 +65,7 @@ function getPackageConfig() {
     }
 }
 
-export function config(customConfig): JestScreenshotConfiguration {
+export function config(customConfig?: JestScreenshotConfiguration): JestScreenshotConfiguration {
     const fileConfig = getFileConfig();
     const packageConfig = getPackageConfig();
     const configuration = Object.assign({}, packageConfig, fileConfig, customConfig);

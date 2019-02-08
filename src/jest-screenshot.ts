@@ -7,7 +7,7 @@ import { JestScreenshotConfiguration, config } from "./config";
  *
  * A configuration object can be passed as the first argument.
  */
-export function setupJestScreenshot(customConfig = {}) {
+export function setupJestScreenshot(customConfig?: JestScreenshotConfiguration) {
     if (typeof expect === "undefined") {
         throw new Error("Jest: Could not find `expect`. Can't setup jest-screenshot.");
     }

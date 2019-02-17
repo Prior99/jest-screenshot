@@ -13,7 +13,7 @@
       "diff",
       "image"
   ],
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "A jest extension to deal with screenshots and all sorts of images.",
   "main": "dist/index.js",
   "author": "Frederick Gnodtke",

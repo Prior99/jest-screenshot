@@ -1,4 +1,6 @@
 import { config, JestScreenshotConfiguration } from "./config";
+import { AggregatedResult } from "@jest/test-result";
+import { Context } from "@jest/reporters";
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync, unlinkSync } from "fs";
 import * as path from "path";
 import { sync as rimrafSync } from "rimraf";
@@ -32,7 +34,7 @@ export = class JestScreenshotReporter { // tslint:disable-line
         }
     }
 
-    public onRunComplete(contexts: Set<jest.Context>, { testResults, numFailedTests }: jest.AggregatedResult) {
+    public onRunComplete(contexts: Set<Context>, { testResults, numFailedTests }: AggregatedResult) {
         const { reportDir: reportDirName, noReport } = this.config;
         const reportDir = getReportDir(reportDirName);
         const reportsDir = path.join(reportDir, "reports");

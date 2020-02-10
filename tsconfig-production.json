@@ -10,6 +10,7 @@
         "outDir": "dist",
         "lib": ["es2016", "dom"],
         "rootDir": "./src",
+        "esModuleInterop": true,
         "moduleResolution": "node"
     },
     "exclude": [

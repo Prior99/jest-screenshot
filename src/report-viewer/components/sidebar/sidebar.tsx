@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as bulma from "bulma";
-import * as classNames from "classnames/bind";
+import classNames from "classnames/bind";
 import * as css from "./sidebar.scss";
 import { observer } from "mobx-react";
 import { external, inject } from "tsdi";

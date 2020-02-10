@@ -3,7 +3,7 @@ import { diffImages, DiffImage } from "native-image-diff";
 import chalk from "chalk";
 import { existsSync, writeFileSync, readFileSync } from "fs";
 import { getSnapshotPath, getReportPath, getReportDir } from "./filenames";
-import { SnapshotState, isJestTestConfiguration, MatcherResult } from "./jest";
+import { isJestTestConfiguration, MatcherResult } from "./jest";
 import { sync as mkdirp } from "mkdirp";
 import * as path from "path";
 import { JestScreenshotConfiguration } from "./config";

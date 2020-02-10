@@ -15,7 +15,7 @@ describe("DiffSlider", () => {
     beforeEach(() => {
         HTMLDivElement.prototype.getBoundingClientRect = () => ({
             top: 10, left: 10, right: 10, bottom: 10, width: 100, height: 100,
-        });
+        } as DOMRect);
     });
 
     it("looks as expected", () => {
@@ -57,7 +57,7 @@ describe("DiffSlider", () => {
         const element = mount(<DiffSlider {...someProps} />);
         HTMLDivElement.prototype.getBoundingClientRect = () => ({
             top: 10, left: 10, right: 10, bottom: 10, width: 200, height: 100,
-        });
+        } as DOMRect);
         window.dispatchEvent(new Event("resize"));
         expect((element.find("div.viewer-container").instance() as any).style.height).toBe("200px");
         [
@@ -77,7 +77,7 @@ describe("DiffSlider", () => {
         const element = mount(<DiffSlider {...someProps} />);
         HTMLDivElement.prototype.getBoundingClientRect = () => ({
             top: 10, left: 10, right: 10, bottom: 10, width: 200, height: 100,
-        });
+        } as DOMRect);
         tsdi.get(StoreUi).toggleMenu();
         await new Promise(resolve => setTimeout(resolve, 1));
         expect((element.find("div.viewer-container").instance() as any).style.height).toBe("200px");

@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as bulma from "bulma";
-import Ansi = require("ansi-to-react"); // tslint:disable-line
-import * as classNames from "classnames/bind";
+import Ansi from "ansi-to-react"; // tslint:disable-line
+import classNames from "classnames/bind";
 import { FailedSnapshotInfo } from "../../../reporter-types";
 import { LevelItem } from "../level-item";
 import { ImageDiffViewer } from "../image-diff-viewer";

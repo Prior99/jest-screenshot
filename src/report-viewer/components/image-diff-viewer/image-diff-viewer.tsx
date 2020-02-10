@@ -2,7 +2,7 @@ import * as React from "react";
 import * as bulma from "bulma";
 import { observer } from "mobx-react";
 import { observable, action, computed } from "mobx";
-import * as classNames from "classnames/bind";
+import classNames from "classnames/bind";
 import { bind } from "lodash-decorators";
 import * as css from "./image-diff-viewer.scss";
 import { DiffSlider } from "./diff-slider";

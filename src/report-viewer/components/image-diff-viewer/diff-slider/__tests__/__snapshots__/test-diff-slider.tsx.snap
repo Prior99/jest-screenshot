@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DiffSlider looks as expected 1`] = `
-<React.Fragment>
+<Fragment>
   <nav
     className="level settings"
   >
@@ -80,7 +80,7 @@ exports[`DiffSlider looks as expected 1`] = `
       />
     </div>
   </div>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`DiffSlider moves the slider when dragging on the image 1`] = `
@@ -351,7 +351,7 @@ exports[`DiffSlider moves the slider when dragging on the image 3`] = `
 `;
 
 exports[`DiffSlider when setting the diff opacity to 0 1`] = `
-<React.Fragment>
+<Fragment>
   <nav
     className="level settings"
   >
@@ -430,11 +430,11 @@ exports[`DiffSlider when setting the diff opacity to 0 1`] = `
       />
     </div>
   </div>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`DiffSlider when setting the diff opacity to 0.7 1`] = `
-<React.Fragment>
+<Fragment>
   <nav
     className="level settings"
   >
@@ -513,11 +513,11 @@ exports[`DiffSlider when setting the diff opacity to 0.7 1`] = `
       />
     </div>
   </div>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`DiffSlider when setting the diff opacity to 1 1`] = `
-<React.Fragment>
+<Fragment>
   <nav
     className="level settings"
   >
@@ -596,5 +596,5 @@ exports[`DiffSlider when setting the diff opacity to 1 1`] = `
       />
     </div>
   </div>
-</React.Fragment>
+</Fragment>
 `;

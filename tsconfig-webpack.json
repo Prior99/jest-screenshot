@@ -9,7 +9,7 @@
         "outDir": "dist",
         "lib": ["es2016", "dom"],
         "moduleResolution": "node",
-        "jsx": "react",
+        "esModuleInterop": true,
         "emitDecoratorMetadata": true
     },
     "exclude": [

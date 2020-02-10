@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import puppeteer from 'puppeteer';
 import { setupJestScreenshot } from 'jest-screenshot';
 

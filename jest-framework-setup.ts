@@ -1,7 +1,7 @@
 (global as any).requestAnimationFrame = (callback: Function) => setTimeout(callback, 0);
 
 import * as Enzyme from "enzyme";
-import * as Adapter from "enzyme-adapter-react-16";
+import Adapter from "enzyme-adapter-react-16";
 import { TSDI } from "tsdi";
 
 Enzyme.configure({ adapter: new Adapter() });

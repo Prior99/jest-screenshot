@@ -5,7 +5,7 @@ import { external, inject } from "tsdi";
 import { action } from "mobx";
 import { StoreUi } from "../../store";
 import * as css from "./navigation.scss";
-import * as classNames from "classnames/bind";
+import classNames from "classnames/bind";
 
 const cx = classNames.bind({ ...bulma, ...css });
 

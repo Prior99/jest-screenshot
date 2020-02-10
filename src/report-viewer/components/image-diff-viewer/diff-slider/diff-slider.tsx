@@ -3,7 +3,7 @@ import * as bulma from "bulma";
 import { observer } from "mobx-react";
 import { external, inject, initialize } from "tsdi";
 import { observable, action, computed, reaction } from "mobx";
-import * as classNames from "classnames/bind";
+import classNames from "classnames/bind";
 import { bind } from "lodash-decorators";
 import { StoreUi } from "../../../store";
 import * as css from "./diff-slider.scss";

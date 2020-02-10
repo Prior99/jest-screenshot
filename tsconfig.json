@@ -10,6 +10,7 @@
         "outDir": "dist",
         "lib": ["es2016", "dom"],
         "moduleResolution": "node",
+        "esModuleInterop": true,
         "emitDecoratorMetadata": true
     },
     "exclude": [

@@ -4334,10 +4334,10 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-native-image-diff@^0.1.9:
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/native-image-diff/-/native-image-diff-0.1.9.tgz#bc57abe9a41b692f00db905f6982ab9c8d1c23cf"
-  integrity sha512-Sp/vDGG5faQUyAaTm0qvR0MuwyVBP7gL8Yc1JQqF2ZLk0rVszRWZWrZ/nVqzQwh9YxD1MvcwbIwEzk09gc1YVA==
+native-image-diff@^0.1.10:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/native-image-diff/-/native-image-diff-0.1.10.tgz#fae46881e1dc51098b18670ad2d690d0cecdd9d2"
+  integrity sha512-asBfqfeCCH1MdrusfQKg30aPI+U6B0wqvN4ugfOUbEita3bWZrw2qLszT/q/XvP1I+j2/EUzJyNy1Qk6BVwzVA==
   dependencies:
     request "^2.88.0"
 
@@ -4395,10 +4395,10 @@ node-int64@^0.4.0:
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"
   integrity sha1-h6kGXNs1XTGC2PlM4RGIuCXGijs=
 
-node-libpng@^0.2.7:
-  version "0.2.13"
-  resolved "https://registry.yarnpkg.com/node-libpng/-/node-libpng-0.2.13.tgz#8a8b94cd3ea99f3db196ad0ae5214df1a645a1da"
-  integrity sha512-SJkfIS0No/S62QBGie+8wAVDnwu6Eqjx/oGxc4OfjxDRQIGO0L29dL7gbu7bSKUh4MtIUVARrqY4Olu9Vn4MBA==
+node-libpng@^0.2.14:
+  version "0.2.14"
+  resolved "https://registry.yarnpkg.com/node-libpng/-/node-libpng-0.2.14.tgz#3c8062f995115bb0394b3d9616d0b6c229954eee"
+  integrity sha512-EPUA7MbQqtA7rhbC4xJAAMvDT5mdpq3G1JJMa56R8uyEOq86Pr1XOllWdQgQDNEjy+P9g4ZrHw2yrFg8B6mIOw==
   dependencies:
     request "^2.88.0"
 

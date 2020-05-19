@@ -174,8 +174,6 @@ export function toMatchImageSnapshot(
             const diffPath = path.join(reportPath, "diff.png");
             const snapshotPathReport = path.join(reportPath, "snapshot.png");
             writeFileSync(receivedPath, received);
-            writePngFileSync(diffPath, diffImage.data, diffImage);
-            writeFileSync(receivedPath, received);
             writeFileSync(snapshotPathReport, readFileSync(snapshotPath));
             writePngFileSync(diffPath, diffImage.data, diffImage);
             writeFileSync(path.join(reportPath, "info.json"), JSON.stringify({

@@ -9,5 +9,5 @@ declare global {
 }
 
 export { setupJestScreenshot } from "./jest-screenshot";
-export { toMatchImageSnapshot } from "./to-match-image-snapshot";
+export {  toMatchImageSnapshot } from "./to-match-image-snapshot";
 export { JestScreenshotConfiguration, config } from "./config";

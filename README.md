@@ -52,6 +52,8 @@ Store the above code in a `setup-framework.js` file and specify it when configur
 }
 ```
 
+_TypeScript Tip: to enable jest matcher types for `toMatchImageSnapshot()`, use a `*.ts` for your setup file._
+
 ### Installing the reporter
 
 In order to generate the report, the reporter must be registered in the Jest configuration:

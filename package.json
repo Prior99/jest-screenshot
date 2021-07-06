@@ -13,7 +13,7 @@
     "diff",
     "image"
   ],
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A jest extension to deal with screenshots and all sorts of images.",
   "main": "dist/index.js",
   "author": "Frederick Gnodtke",
@@ -23,7 +23,7 @@
     "test": "jest -i",
     "lint": "tslint --format stylish --type-check --project tsconfig.json",
     "clean": "rm -rf dist",
-    "docs": "typedoc --mode file --out docs/ --exclude '**/test-*.ts,**/report-viewer/**/*' src/"
+    "docs": "typedoc --out docs/ --exclude '**/test-*.ts,**/report-viewer/**/*' src/"
   },
   "repository": {
     "type": "git",
@@ -95,35 +95,35 @@
     "bulma": "^0.8.0",
     "classnames": "^2.2.5",
     "coveralls": "^3.0.0",
-    "css-loader": "^3.4.2",
+    "css-loader": "^5.2.6",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "lodash-decorators": "^6.0.1",
-    "mini-css-extract-plugin": "^0.9.0",
+    "mini-css-extract-plugin": "^2.1.0",
     "mobx": "^5.15.4",
     "mobx-react": "^6.1.7",
-    "node-sass": "^4.8.3",
+    "node-sass": "^6.0.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
-    "resolve-url-loader": "^3.1.1",
+    "resolve-url-loader": "^4.0.0",
     "rimraf": "^3.0.2",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^12.1.0",
     "ts-jest": "^26.4.4",
     "tsdi": "^0.22.0",
     "tslint": "^6.0.0",
-    "typedoc": "^0.16.9",
+    "typedoc": "^0.21.2",
     "typescript": "^4.1.2",
-    "webpack": "4.41.5",
-    "webpack-cli": "^3.1.2"
+    "webpack": "5.42.1",
+    "webpack-cli": "^4.7.2"
   },
   "dependencies": {
     "chalk": "^3.0.0",
     "lodash.kebabcase": "^4.1.1",
-    "mkdirp": "^1.0.3",
-    "native-image-diff": "^0.1.11",
-    "node-libpng": "^0.2.18"
+    "mkdirp": "^1.0.4",
+    "native-image-diff": "^0.1.14",
+    "node-libpng": "^0.2.20"
   }
 }

@@ -1,7 +1,7 @@
 import * as React from "react";
 import bulma from "bulma";
 import classNames from "classnames/bind";
-import * as css from "./sidebar.scss";
+import css from "./sidebar.scss";
 import { observer } from "mobx-react";
 import { external, inject } from "tsdi";
 import { FileList } from "../file-list";

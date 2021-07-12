@@ -5,7 +5,7 @@ import classNames from "classnames/bind";
 import { FailedSnapshotInfo } from "../../../reporter-types";
 import { LevelItem } from "../level-item";
 import { ImageDiffViewer } from "../image-diff-viewer";
-import * as css from "./snapshot.scss";
+import css from "./snapshot.scss";
 
 const cx = classNames.bind({ ...bulma, ...css });
 

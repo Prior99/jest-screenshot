@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { observable, action, computed } from "mobx";
 import classNames from "classnames/bind";
 import { bind } from "lodash-decorators";
-import * as css from "./image-diff-viewer.scss";
+import css from "./image-diff-viewer.scss";
 import { DiffSlider } from "./diff-slider";
 import { DiffBlend } from "./diff-blend";
 import { DiffSideBySide } from "./diff-side-by-side";

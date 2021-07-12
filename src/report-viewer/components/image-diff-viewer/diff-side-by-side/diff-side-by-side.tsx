@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { observable, action, computed, reaction } from "mobx";
 import classNames from "classnames/bind";
 import { bind } from "lodash-decorators";
-import * as css from "./diff-side-by-side.scss";
+import css from "./diff-side-by-side.scss";
 
 const cx = classNames.bind({ ...bulma, ...css });
 

@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { external, inject } from "tsdi";
 import { action } from "mobx";
 import { StoreUi } from "../../store";
-import * as css from "./navigation.scss";
+import css from "./navigation.scss";
 import classNames from "classnames/bind";
 
 const cx = classNames.bind({ ...bulma, ...css });

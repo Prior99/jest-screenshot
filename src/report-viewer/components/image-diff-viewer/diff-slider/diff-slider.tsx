@@ -6,7 +6,7 @@ import { observable, action, computed, reaction } from "mobx";
 import classNames from "classnames/bind";
 import { bind } from "lodash-decorators";
 import { StoreUi } from "../../../store";
-import * as css from "./diff-slider.scss";
+import css from "./diff-slider.scss";
 
 const cx = classNames.bind({ ...bulma, ...css });
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as bulma from "bulma";
+import bulma from "bulma";
 import { observer } from "mobx-react";
 import { external, inject } from "tsdi";
 import { action } from "mobx";

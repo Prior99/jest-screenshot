@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as bulma from "bulma";
+import bulma from "bulma";
 import Ansi from "ansi-to-react"; // tslint:disable-line
 import classNames from "classnames/bind";
 import { FailedSnapshotInfo } from "../../../reporter-types";

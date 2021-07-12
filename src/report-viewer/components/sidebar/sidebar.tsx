@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as bulma from "bulma";
+import bulma from "bulma";
 import classNames from "classnames/bind";
 import * as css from "./sidebar.scss";
 import { observer } from "mobx-react";

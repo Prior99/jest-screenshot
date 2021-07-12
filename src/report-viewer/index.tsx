@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import * as bulma from "bulma";
+import bulma from "bulma";
 import classNames from "classnames/bind";
 import { TSDI } from "tsdi";
 import { Navigation, Sidebar, Main } from "./components";

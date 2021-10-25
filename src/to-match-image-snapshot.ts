@@ -17,7 +17,14 @@ export interface ImageMatcherResult extends MatcherResult {
     snapshotNumber?: number;
 }
 
-export interface ToMatchImageSnapshotParameters {
+export interface ToMatchImageSnapshotParameters extends
+    Pick<
+        JestScreenshotConfiguration,
+        | "detectAntialiasing"
+        | "colorThreshold"
+        | "pixelThresholdAbsolute"
+        | "pixelThresholdRelative"
+    > {
     /**
      * Can be used to override the path to which the snapshot image
      * will be written.

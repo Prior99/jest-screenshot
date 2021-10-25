@@ -65,10 +65,10 @@ function getPackageConfig() {
     }
 }
 
-export function config(customConfig?: JestScreenshotConfiguration): JestScreenshotConfiguration {
+export function config(...customConfigs: JestScreenshotConfiguration[]): JestScreenshotConfiguration {
     const fileConfig = getFileConfig();
     const packageConfig = getPackageConfig();
-    const configuration = Object.assign({}, packageConfig, fileConfig, customConfig);
+    const configuration = Object.assign({}, packageConfig, fileConfig, ...customConfigs);
     const { pixelThresholdAbsolute, pixelThresholdRelative } = configuration;
     if (typeof pixelThresholdAbsolute === "undefined" && typeof pixelThresholdRelative === "undefined") {
         configuration.pixelThresholdRelative = 0;

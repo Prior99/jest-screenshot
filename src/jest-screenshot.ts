@@ -13,7 +13,7 @@ export function setupJestScreenshot(customConfig?: JestScreenshotConfiguration) 
     }
     expect.extend({
         toMatchImageSnapshot(received: Buffer, parameters: ToMatchImageSnapshotParameters) {
-            return toMatchImageSnapshot.call(this, received, config(customConfig), parameters);
+            return toMatchImageSnapshot.call(this, received, config(customConfig, parameters), parameters);
         },
     });
 }

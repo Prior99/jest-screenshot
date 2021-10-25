@@ -61,6 +61,15 @@ describe("toMatchImageSnapshot", () => {
                     expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
                 }).toThrowErrorMatchingSnapshot();
             });
+
+            it(`with a color threshold of ${colorThreshold} provided through matcher params detects the snapshot as not matching`, () => {
+                writeFileSync(`${process.cwd()}/jest-screenshot.json`, JSON.stringify({}));
+                setupJestScreenshot();
+                expect(() => {
+                    expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`))
+                      .toMatchImageSnapshot({colorThreshold});
+                }).toThrowErrorMatchingSnapshot();
+            });
         });
 
         [
@@ -72,6 +81,15 @@ describe("toMatchImageSnapshot", () => {
                 setupJestScreenshot();
                 expect(() => {
                     expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
+                }).not.toThrowError();
+            });
+
+            it(`with a color threshold of ${colorThreshold} provided through matcher params detects the snapshot as matching`, () => {
+                writeFileSync(`${process.cwd()}/jest-screenshot.json`, JSON.stringify({  }));
+                setupJestScreenshot();
+                expect(() => {
+                    expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`))
+                      .toMatchImageSnapshot({colorThreshold});
                 }).not.toThrowError();
             });
         });
@@ -92,6 +110,18 @@ describe("toMatchImageSnapshot", () => {
             }).toThrowErrorMatchingSnapshot();
         });
 
+        it("fails with an absolute threshold of 204 passed through matcher params", () => {
+            const pixelThresholdAbsolute = 204;
+            writeFileSync(`${process.cwd()}/jest-screenshot.json`, JSON.stringify({
+                colorThreshold,
+            }));
+            setupJestScreenshot();
+            expect(() => {
+                expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`))
+                  .toMatchImageSnapshot({pixelThresholdAbsolute});
+            }).toThrowErrorMatchingSnapshot();
+        });
+
         it("passes with an absolute threshold of 205", () => {
             const pixelThresholdAbsolute = 205;
             writeFileSync(`${process.cwd()}/jest-screenshot.json`, JSON.stringify({
@@ -101,6 +131,20 @@ describe("toMatchImageSnapshot", () => {
             setupJestScreenshot();
             expect(() => {
                 expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`)).toMatchImageSnapshot();
+            }).not.toThrowError();
+        });
+
+        it("passes with an absolute threshold of 205 passed through matcher params", () => {
+            const pixelThresholdAbsolute = 205;
+            writeFileSync(`${process.cwd()}/jest-screenshot.json`, JSON.stringify({
+                colorThreshold,
+            }));
+            setupJestScreenshot();
+            expect(() => {
+                expect(readFileSync(`${__dirname}/fixtures/red-rectangle-example-red.png`))
+                  .toMatchImageSnapshot({
+                      pixelThresholdAbsolute,
+                  });
             }).not.toThrowError();
         });
     });

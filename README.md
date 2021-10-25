@@ -145,6 +145,25 @@ describe("My fancy image", () => {
 });
 ```
 
+It is possible to specify the image comparison configuration at the matcher level.
+Configuration set at this level will be merged into the main configuration, with keys
+defined at this level taking precedence.
+
+```typescript
+describe("My quite flaky image", () => {
+    const myFlakyImage = readFileSync("../my-flaky-image.png");
+
+    it("is a bit flaky", () => {
+        expect(myFlakyImage).toMatchImageSnapshot({
+           detectAntialiasing: true,
+           colorThreshold: 0.1,
+           pixelThresholdAbsolute: 25,
+           pixelThresholdRelative: 0.1
+        });
+    });
+});
+```
+
 It is possible to import ```toMatchImageSnapshot()``` for custom assertions.
 As it requires configuration as second argument, ```config()``` function 
 (_which is responsible for reading configuration from  jest-screenshot.json/package.json_) is also exposed.
